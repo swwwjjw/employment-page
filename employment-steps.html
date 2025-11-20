@@ -64,7 +64,7 @@
         gap: 8px;
         padding: 4px 12px;
         margin-top: 12px;
-        margin-bottom: 0px;
+        margin-bottom: 12px;
         background-color: #229ed9;
         color: #ffffff;
         text-decoration: none;
@@ -267,12 +267,15 @@
         <p class="attention">Примерное время прохождения - 1.5 часа</p>
         <div class="section-toggle">
           <input type="checkbox" id="toggle-ediny-den" aria-controls="ediny-den-oformleniya" />
-          <label for="toggle-ediny-den">Я прошел онлайн инструктажи и готов перейти к Единому дню оформления</label>
+          <label for="toggle-ediny-den">Я прошел онлайн инструктажи</label>
         </div>
       </section>
 
       <section id="ediny-den-oformleniya" hidden>
         <h2>05. Единый день оформления</h2>
+        <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
+        Запись на Единый день оформления
+        </a>
         <p class="attention">Перепроверьте список необходимых документов:</p>
         <ul class="list">
           <li><b>Оригинал</b> паспорта;</li>
@@ -287,7 +290,7 @@
           <li>Справка об отсутствии административных правонарушений за употребление наркотических веществ (для инспекторов по досмотру);</li>
           <li>Анкета нового сотрудника (<b>Должна быть заполнена синей ручкой</b>);</li>
           <li><b>Оригинал</b> свидетельства о браке/рождении детей/перемене имени (при наличии);</li>
-          <li><b>Оригинал</b> приписного удостоверения или военного билета (для военнообязанных);</li>
+          <li><b>Оригинал</b> приписного удостоверения или военного билета (<b>Будущий сотрудник должен состоять на военном учете в военкомате Санкт-Петербурга</b>);</li>
           <li><b>Оригинал</b> водительского удостоверения (если требуется по должности)</li>
         </ul>
         <p class="list-header">Программа единого дня оформления:</p>
@@ -299,12 +302,9 @@
           <li>Фото на пропуск в кабинете 202, окно 1. <b>Строго с 14:00 до 14:30</b>;</li>
           <li>Подписание заявления на выбор зарплатной карты и служебной парковки;</li>
         </ul>
-        <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
-        Запись на Единый день оформления
-        </a>
       </section>
 
-      <section id="poluchenie-propuska-i-zarplatnoy-karty">
+      <section id="poluchenie-propuska-i-zarplatnoy-karty" hidden>
         <h2>06. Получение пропуска и зарплатной карты</h2>
         <p>Получить пропуск можно по готовности (уточняйте у руководителя), в кабинете 202, 2-3 окно. С 8:00 до 12:00</p>
       </section>
@@ -313,15 +313,16 @@
       <script>
         (function () {
           const toggle = document.getElementById("toggle-ediny-den");
-          const targetSection = document.getElementById("ediny-den-oformleniya");
-          if (!toggle || !targetSection) {
+          const targetSection1 = document.getElementById("ediny-den-oformleniya");
+          const targetSection2 = document.getElementById("poluchenie-propuska-i-zarplatnoy-karty");
+          if (!toggle || !targetSection1 || !targetSection2) {
             return;
           }
 
           const updateVisibility = () => {
-            targetSection.hidden = !toggle.checked;
+            targetSection1.hidden = !toggle.checked;
+            targetSection2.hidden = targetSection1.hidden;
           };
-
           toggle.addEventListener("change", updateVisibility);
           updateVisibility();
         })();
