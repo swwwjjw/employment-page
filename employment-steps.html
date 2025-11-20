@@ -18,16 +18,25 @@
       }
 
         .toolbar {
+          --toolbar-opacity: 1;
+          --toolbar-fade-distance: 280;
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 1.8vh 1.7vw;
-        background-color: #ffffff;
+          background-color: #ffffff;
           border-bottom: 0.09vh solid #d9e2ef;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          opacity: var(--toolbar-opacity);
+          transition: opacity 0.3s ease-in-out;
+          will-change: opacity;
+        }
+
+        .toolbar.toolbar--noninteractive {
+          pointer-events: none;
+        }
 
         .toolbar img {
           width: 14vw;
@@ -318,22 +327,49 @@
       </section>
     </main>
 
-      <script>
-        (function () {
-          const toggle = document.getElementById("toggle-ediny-den");
-          const targetSection1 = document.getElementById("ediny-den-oformleniya");
-          const targetSection2 = document.getElementById("poluchenie-propuska-i-zarplatnoy-karty");
-          if (!toggle || !targetSection1 || !targetSection2) {
-            return;
-          }
+        <script>
+          (function () {
+            const toggle = document.getElementById("toggle-ediny-den");
+            const targetSection1 = document.getElementById("ediny-den-oformleniya");
+            const targetSection2 = document.getElementById("poluchenie-propuska-i-zarplatnoy-karty");
+            if (!toggle || !targetSection1 || !targetSection2) {
+              return;
+            }
 
-          const updateVisibility = () => {
-            targetSection1.hidden = !toggle.checked;
-            targetSection2.hidden = targetSection1.hidden;
-          };
-          toggle.addEventListener("change", updateVisibility);
-          updateVisibility();
-        })();
-      </script>
+            const updateVisibility = () => {
+              targetSection1.hidden = !toggle.checked;
+              targetSection2.hidden = targetSection1.hidden;
+            };
+            toggle.addEventListener("change", updateVisibility);
+            updateVisibility();
+          })();
+
+          (function () {
+            const toolbar = document.querySelector(".toolbar");
+            if (!toolbar) {
+              return;
+            }
+
+            const getFadeDistance = () => {
+              const value = parseFloat(
+                getComputedStyle(toolbar).getPropertyValue("--toolbar-fade-distance")
+              );
+              return Number.isFinite(value) && value > 0 ? value : 240;
+            };
+
+            const fadeDistance = getFadeDistance();
+
+            const updateToolbarFade = () => {
+              const scrollY = window.scrollY || window.pageYOffset;
+              const clampedScroll = Math.min(Math.max(scrollY, 0), fadeDistance);
+              const opacity = 1 - clampedScroll / fadeDistance;
+              toolbar.style.setProperty("--toolbar-opacity", opacity.toFixed(3));
+              toolbar.classList.toggle("toolbar--noninteractive", opacity <= 0.05);
+            };
+
+            updateToolbarFade();
+            window.addEventListener("scroll", updateToolbarFade, { passive: true });
+          })();
+        </script>
   </body>
 </html>
