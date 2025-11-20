@@ -23,20 +23,26 @@
           justify-content: space-between;
           padding: 1.8vh 1.7vw;
         background-color: #ffffff;
-        border-bottom: 1px solid #d9e2ef;
+          border-bottom: 0.09vh solid #d9e2ef;
         position: sticky;
         top: 0;
         z-index: 10;
       }
 
-      .logo-placeholder {
+        .toolbar img {
+          width: 14vw;
+          max-height: 6.76vh;
+          height: auto;
+        }
+
+        .logo-placeholder {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 160px;
-        height: 48px;
-        border: 2px dashed #8aa0c7;
-        border-radius: 8px;
+          width: 8.33vw;
+          height: 4.44vh;
+          border: 0.19vh dashed #8aa0c7;
+          border-radius: 0.42vw;
         color: #8aa0c7;
         font-weight: 600;
       }
@@ -44,12 +50,12 @@
         .telegram-button {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          gap: 0.42vw;
           padding: 1.3vh 1.4vw;
         background-color: #229ed9;
         color: #ffffff;
         text-decoration: none;
-        border-radius: 24px;
+          border-radius: 1.25vw;
         font-weight: 600;
         transition: background-color 0.2s ease-in-out;
       }
@@ -61,14 +67,14 @@
         .ref-button {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          gap: 0.42vw;
           padding: 0.45vh 0.85vw;
           margin-top: 0.56vh;
           margin-bottom: 0vh;
         background-color: #229ed9;
         color: #ffffff;
         text-decoration: none;
-        border-radius: 24px;
+          border-radius: 1.25vw;
         font-weight: 600;
         transition: background-color 0.2s ease-in-out;
       }
@@ -97,7 +103,7 @@
       }
 
         main {
-          max-width: 960px;
+          max-width: 50vw;
           margin: 0 auto;
           padding: 3.6vh 1.1vw 7.1vh;
       }
@@ -105,15 +111,15 @@
         h1 {
         font-size: 2.5rem;
         text-transform: uppercase;
-        letter-spacing: 2px;
+          letter-spacing: 0.10vw;
           margin: 2.22vh 0vw 3.70vh;
         text-align: center;
       }
 
         .steps-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(11.46vw, 1fr));
+          gap: 1.04vw;
           margin-top: 0vh;
           margin-bottom: 5.19vh;
       }
@@ -122,8 +128,8 @@
           display: block;
           padding: 2.2vh 1.4vw;
         background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(31, 42, 68, 0.08);
+          border-radius: 0.63vw;
+          box-shadow: 0 0.93vh 2.31vh rgba(31, 42, 68, 0.08);
         text-decoration: none;
         color: inherit;
         font-weight: 600;
@@ -132,16 +138,16 @@
       }
 
       .step-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 32px rgba(31, 42, 68, 0.12);
+          transform: translateY(-0.37vh);
+          box-shadow: 0 1.67vh 2.96vh rgba(31, 42, 68, 0.12);
       }
 
         section {
           margin-bottom: 5.19vh;
           padding: 2.7vh 2.2vw;
         background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(31, 42, 68, 0.06);
+          border-radius: 0.63vw;
+          box-shadow: 0 0.74vh 1.85vh rgba(31, 42, 68, 0.06);
       }
 
         section h2 {
@@ -159,27 +165,27 @@
         .section-toggle {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 0.42vw;
           margin: 1.85vh 0vw 0vh;
           padding: 1.3vh 1.1vw;
-        border: 1px solid #d9e2ef;
-        border-radius: 8px;
+          border: 0.09vh solid #d9e2ef;
+          border-radius: 0.42vw;
         background-color: #f6f8fb;
         font-weight: 600;
         color: #1f2a44;
       }
 
-      .section-toggle input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
+        .section-toggle input[type="checkbox"] {
+          width: 1.67vh;
+          height: 1.67vh;
         accent-color: #229ed9;
       }
 
     </style>
   </head>
   <body>
-    <header class="toolbar">
-      <img src="logotip-pulkovo.png" width="269" height="73">
+      <header class="toolbar">
+        <img src="logotip-pulkovo.png" alt="Пулково Аэропорт логотип" />
       <a class="telegram-button" href="https://t.me/your-telegram-chat" target="_blank" rel="noopener noreferrer">
         Связь с отделом персонала
       </a>
