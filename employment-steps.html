@@ -118,42 +118,61 @@
         margin-bottom: 56px;
       }
 
-      .step-card {
-        display: block;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(31, 42, 68, 0.08);
-        text-decoration: none;
-        color: inherit;
-        font-weight: 600;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
+        .step-card {
+          display: block;
+          padding: 20px;
+          background-color: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px rgba(31, 42, 68, 0.08);
+          text-decoration: none;
+          color: inherit;
+          font-weight: 600;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
-      .step-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 32px rgba(31, 42, 68, 0.12);
-      }
+        .step-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 18px 32px rgba(31, 42, 68, 0.12);
+        }
 
-      section {
-        margin-bottom: 56px;
-        padding: 24px 32px;
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(31, 42, 68, 0.06);
-      }
+        section {
+          margin-bottom: 56px;
+          padding: 24px 32px;
+          background-color: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(31, 42, 68, 0.06);
+        }
 
-      section h2 {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        font-size: 1.75rem;
-      }
+        section h2 {
+          margin-top: 0px;
+          margin-bottom: 0px;
+          font-size: 1.75rem;
+        }
 
-      section p {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        color: #51647c;
-      }
+        section p {
+          margin-top: 0px;
+          margin-bottom: 0px;
+          color: #51647c;
+        }
+
+        .section-toggle {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 20px 0 0;
+          padding: 12px 16px;
+          border: 1px solid #d9e2ef;
+          border-radius: 8px;
+          background-color: #f6f8fb;
+          font-weight: 600;
+          color: #1f2a44;
+        }
+
+        .section-toggle input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          accent-color: #229ed9;
+        }
 
     </style>
   </head>
@@ -246,9 +265,13 @@
           <li>Сразу после просмотра каждого инструктажа будет доступен <b>тест</b>, который можно проходить несколько раз;</li>
         </ul>
         <p class="attention">Примерное время прохождения - 1.5 часа</p>
+        <div class="section-toggle">
+          <input type="checkbox" id="toggle-ediny-den" aria-controls="ediny-den-oformleniya" />
+          <label for="toggle-ediny-den">Я прошел онлайн инструктажи и готов перейти к Единому дню оформления</label>
+        </div>
       </section>
 
-      <section id="ediny-den-oformleniya">
+      <section id="ediny-den-oformleniya" hidden>
         <h2>05. Единый день оформления</h2>
         <p class="attention">Перепроверьте список необходимых документов:</p>
         <ul class="list">
@@ -286,5 +309,22 @@
         <p>Получить пропуск можно по готовности (уточняйте у руководителя), в кабинете 202, 2-3 окно. С 8:00 до 12:00</p>
       </section>
     </main>
+
+      <script>
+        (function () {
+          const toggle = document.getElementById("toggle-ediny-den");
+          const targetSection = document.getElementById("ediny-den-oformleniya");
+          if (!toggle || !targetSection) {
+            return;
+          }
+
+          const updateVisibility = () => {
+            targetSection.hidden = !toggle.checked;
+          };
+
+          toggle.addEventListener("change", updateVisibility);
+          updateVisibility();
+        })();
+      </script>
   </body>
 </html>
