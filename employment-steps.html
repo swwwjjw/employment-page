@@ -132,6 +132,90 @@
           margin-top: 0vh;
           margin-bottom: 5.19vh;
       }
+        
+        .service-selector {
+          margin-bottom: 5.19vh;
+          padding: 2.59vh 2.2vw;
+          background-color: #ffffff;
+          border-radius: 0.63vw;
+          box-shadow: 0 0.74vh 1.85vh rgba(31, 42, 68, 0.06);
+        }
+
+        .service-selector__header {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: baseline;
+          gap: 0.63vw;
+          margin-bottom: 1.48vh;
+        }
+
+        .service-selector__title {
+          margin: 0;
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        .service-selector__current {
+          margin: 0;
+          font-size: 0.95rem;
+          color: #51647c;
+        }
+
+        .service-selector__current span {
+          font-weight: 600;
+          color: #1f2a44;
+        }
+
+        #service-selector {
+          width: 100%;
+          padding: 1.3vh 1.1vw;
+          border: 0.09vh solid #d9e2ef;
+          border-radius: 0.42vw;
+          font-size: 1rem;
+          font-family: inherit;
+          background-color: #f6f8fb;
+          color: #1f2a44;
+          transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        #service-selector:focus {
+          outline: none;
+          border-color: #229ed9;
+          box-shadow: 0 0 0 0.19vh rgba(34, 158, 217, 0.25);
+        }
+
+        .service-selector__hint {
+          margin: 1.11vh 0 0;
+          font-size: 0.95rem;
+          color: #51647c;
+        }
+
+        .section-dynamic-block {
+          margin: 1.85vh 0 2.4vh;
+          padding: 1.85vh 1.4vw;
+          border: 0.09vh dashed #c7d2e7;
+          border-radius: 0.42vw;
+          background-color: #f1f5ff;
+        }
+
+        .section-dynamic-block h3 {
+          margin: 0 0 0.93vh;
+          font-size: 1rem;
+          letter-spacing: 0.03vw;
+          color: #1a87ba;
+        }
+
+        .section-lead {
+          margin: 0 0 0.93vh;
+          color: #1f2a44;
+          font-weight: 600;
+        }
+
+        .section-note {
+          margin: 1.11vh 0 0;
+          color: #1a87ba;
+          font-weight: 500;
+        }
 
         .step-card {
           display: block;
@@ -212,6 +296,30 @@
         <a class="step-card" href="#poluchenie-propuska-i-zarplatnoy-karty">06. Получение пропуска и зарплатной карты</a>
       </nav>
 
+        <div class="service-selector" role="region" aria-labelledby="service-selector-label">
+          <div class="service-selector__header">
+            <p class="service-selector__title" id="service-selector-label">Выберите службу или проект, чтобы увидеть конкретные требования на ключевых этапах</p>
+            <p class="service-selector__current">
+              Текущий выбор:
+              <span id="service-selection-caption">Группа начальной подготовки</span>
+            </p>
+          </div>
+          <select id="service-selector" aria-describedby="service-selector-hint" name="service-selector">
+            <option value="initial-training">Группа начальной подготовки</option>
+            <option value="baggage">Служба обработки багажа</option>
+            <option value="cleaning">Служба бытового обслуживания воздушных судов</option>
+            <option value="passengers">Служба пассажирских перевозок</option>
+            <option value="student-project">Студенческий проект "Взлетная полоса"</option>
+            <option value="fire-rescue">Служба противопожарного и аварийно-спасательного обеспечения</option>
+            <option value="spot-vacancies">Точечные вакансии</option>
+            <option value="apron">Служба перронного обслуживания</option>
+            <option value="aerodrome">Аэродромная служба</option>
+          </select>
+          <p class="service-selector__hint" id="service-selector-hint">
+            Мы автоматически подставим важные акценты в этапы 02, 03 и 05 после выбора службы.
+          </p>
+        </div>
+
       <section id="podpisanie-zayavleniya">
         <h2>01. Подписание заявления</h2>
         <p class="list-header">На данном этапе необходимо:</p>
@@ -229,6 +337,7 @@
 
       <section id="poluchenie-spravok-iz-gos-organov">
         <h2>02. Получение справок из гос. органов</h2>
+          <div class="section-dynamic-block" data-dynamic-section="docs" aria-live="polite"></div>
         <p class="list-header">На данном этапе необходимо получить:</p>
         <ul class="list">
           <li>Справку об отсутствии судимости;</li>
@@ -250,6 +359,7 @@
 
       <section id="prohozhdenie-medosmotr">
         <h2>03. Прохождение медосмотров</h2>
+          <div class="section-dynamic-block" data-dynamic-section="medical" aria-live="polite"></div>
         <p class="list-header">На данном этапе необходимо:</p>
         <ol class="list">
           <li>Пройти предварительный медицинский осмотр;</li>
@@ -302,6 +412,7 @@
 
       <section id="ediny-den-oformleniya" hidden>
         <h2>05. Единый день оформления</h2>
+          <div class="section-dynamic-block" data-dynamic-section="eday" aria-live="polite"></div>
         <p class="attention">Запишитесь на удобную для вас дату:</p>
         <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
         Запись на Единый день оформления
@@ -341,6 +452,417 @@
     </main>
 
         <script>
+            (function () {
+              const serviceSelector = document.getElementById("service-selector");
+              const serviceCaption = document.getElementById("service-selection-caption");
+              const sectionTargets = {
+                docs: document.querySelector('[data-dynamic-section="docs"]'),
+                medical: document.querySelector('[data-dynamic-section="medical"]'),
+                eday: document.querySelector('[data-dynamic-section="eday"]'),
+              };
+              if (!serviceSelector || Object.values(sectionTargets).some((element) => !element)) {
+                return;
+              }
+
+              const stageTitles = {
+                docs: "Справки и документы",
+                medical: "Медосмотры",
+                eday: "Единый день оформления",
+              };
+
+              const serviceData = {
+                "initial-training": {
+                  label: "Группа начальной подготовки",
+                  sections: {
+                    docs: {
+                      lead: "Для кандидатов без отраслевого опыта достаточно базовых документов.",
+                      itemsTitle: "Что подготовить дополнительно:",
+                      listType: "ul",
+                      items: [
+                        "Паспорт и копию страниц с регистрацией.",
+                        "Выписку из СТД-Р или справку из вуза о текущем обучении.",
+                        "Согласие на обработку персональных данных, подписанное в отделе кадров.",
+                      ],
+                      note: "Все справки должны быть выданы не ранее чем за 30 дней до ЕДО.",
+                    },
+                    medical: {
+                      lead: "Стандартный маршрут медосмотров без дополнительных обследований.",
+                      itemsTitle: "Маршрут прохождения:",
+                      listType: "ol",
+                      items: [
+                        "Предварительный осмотр в клинике-партнере (каб. 203).",
+                        "Психиатрическое освидетельствование по направлению.",
+                        "Флюорография и загрузка результата в HR-бот до ЕДО.",
+                      ],
+                      note: "Записывайтесь сразу после получения направлений, очереди быстро заполняются.",
+                    },
+                    eday: {
+                      lead: "На ЕДО уделим внимание базовому ознакомлению с аэропортом.",
+                      itemsTitle: "Что произойдет:",
+                      listType: "ul",
+                      items: [
+                        "Презентация о структуре аэропорта и основных правилах.",
+                        "Оформление копий СНИЛС/ИНН и анкет новых сотрудников.",
+                        "Назначение наставника и выдача расписания обучения.",
+                      ],
+                      note: "На группу отводится примерно 2 часа, приходите за 15 минут до начала.",
+                    },
+                  },
+                },
+                baggage: {
+                  label: "Служба обработки багажа",
+                  sections: {
+                    docs: {
+                      lead: "Для сотрудников службы обработки багажа нужны дополнительные подтверждения.",
+                      itemsTitle: "Добавьте к основному пакету:",
+                      listType: "ul",
+                      items: [
+                        "Удостоверение о прохождении инструктажа по охране труда (если уже получали).",
+                        "Справку об отсутствии административных правонарушений не старше 10 дней.",
+                        "Согласие на работу с грузоподъемным оборудованием (форма СБ-02).",
+                      ],
+                      note: "Если удостоверения нет, отметьте это в анкете - организуем обучение.",
+                    },
+                    medical: {
+                      lead: "Медкомиссия дополняется проверками для тяжелого физического труда.",
+                      itemsTitle: "Обязательно пройдите:",
+                      listType: "ul",
+                      items: [
+                        "Осмотр хирурга и невролога с отметкой о допуске к тяжелому труду.",
+                        "Кардиограмму после нагрузки в клинике-партнере.",
+                        "Тест на цветоразличение для безопасной работы на перроне.",
+                      ],
+                      note: "Возьмите спортивную одежду для велоэргометра.",
+                    },
+                    eday: {
+                      lead: "На ЕДО оформляем допуски к зонам обработки багажа.",
+                      itemsTitle: "Этапы дня:",
+                      listType: "ul",
+                      items: [
+                        "Подписание журнала по технике безопасности склада.",
+                        "Получение временного пропуска в производственные помещения.",
+                        "Назначение даты стажировки с мастером сортировочной зоны.",
+                      ],
+                      note: "К самостоятельной работе допускаем после минимум трех смен стажировки.",
+                    },
+                  },
+                },
+                cleaning: {
+                  label: "Служба бытового обслуживания воздушных судов",
+                  sections: {
+                    docs: {
+                      lead: "Для службы бытового обслуживания нужны подтверждения санитарных навыков.",
+                      itemsTitle: "Подготовьте:",
+                      listType: "ul",
+                      items: [
+                        "Действующую медицинскую книжку или квитанцию об оформлении.",
+                        "Протокол обучения по применению чистящих средств (форма БО-1).",
+                        "Выписку о прививках или справку из поликлиники.",
+                      ],
+                      note: "Если медкнижка в процессе, принесите временную справку из Роспотребнадзора.",
+                    },
+                    medical: {
+                      lead: "Маршрут включает дерматолога и аллерголога.",
+                      itemsTitle: "Убедитесь, что получили:",
+                      listType: "ul",
+                      items: [
+                        "Заключение дерматолога об отсутствии кожных заболеваний.",
+                        "Аллергопробы или заключение терапевта об отсутствии реакции на реагенты.",
+                        "Результаты спирометрии.",
+                      ],
+                      note: "Результаты аллергопроб действуют шесть месяцев.",
+                    },
+                    eday: {
+                      lead: "ЕДО посвящен стандартам уборки воздушных судов.",
+                      itemsTitle: "Во время дня:",
+                      listType: "ul",
+                      items: [
+                        "Практический инструктаж по зонам уборки (каб. 318).",
+                        "Подписание ведомости выдачи моющих средств и СИЗ.",
+                        "Назначение наставника для первой ночной смены.",
+                      ],
+                      note: "Комплект униформы выдадим сразу после инструктажа.",
+                    },
+                  },
+                },
+                passengers: {
+                  label: "Служба пассажирских перевозок",
+                  sections: {
+                    docs: {
+                      lead: "Для службы пассажирских перевозок важен подтвержденный сервисный опыт.",
+                      itemsTitle: "Добавьте к пакету документов:",
+                      listType: "ul",
+                      items: [
+                        "Сертификат владения английским или результат внутреннего теста.",
+                        "Форму СП-12 об отсутствии взысканий по сервисным проектам.",
+                        "Рекомендацию или контакты предыдущего работодателя.",
+                      ],
+                      note: "Если сертификата нет, HR пришлет ссылку на онлайн-тест.",
+                    },
+                    medical: {
+                      lead: "Медосмотры делают акцент на зрении и голосе.",
+                      itemsTitle: "Нужно получить:",
+                      listType: "ul",
+                      items: [
+                        "Осмотр офтальмолога с указанием допустимой коррекции.",
+                        "Заключение ЛОР-врача об отсутствии хронических заболеваний.",
+                        "Психологическое тестирование (назначит координатор).",
+                      ],
+                      note: "Записывайтесь на утренние слоты - результаты готовы в тот же день.",
+                    },
+                    eday: {
+                      lead: "На ЕДО получите инструменты для работы с пассажирами.",
+                      itemsTitle: "Запланировано:",
+                      listType: "ul",
+                      items: [
+                        "Мастер-класс по сервисным сценариям и скриптам.",
+                        "Выдача доступа к стойкам регистрации или планшетам.",
+                        "Распределение по сменам и зонам обслуживания.",
+                      ],
+                      note: "После ЕДО пройдите онбординг на стойках с супервайзером.",
+                    },
+                  },
+                },
+                "student-project": {
+                  label: "Студенческий проект \"Взлетная полоса\"",
+                  sections: {
+                    docs: {
+                      lead: "Участникам проекта нужно подтвердить статус студента.",
+                      itemsTitle: "Не забудьте:",
+                      listType: "ul",
+                      items: [
+                        "Справку об обучении с указанием курса и формы.",
+                        "График учебного процесса или письмо деканата о совмещении.",
+                        "Черновик договора стажировки, если он уже подготовлен.",
+                      ],
+                      note: "Загрузите документы в HR-бот, чтобы ускорить согласование.",
+                    },
+                    medical: {
+                      lead: "Для студентов действует упрощенный маршрут, но базовые справки обязательны.",
+                      itemsTitle: "Минимальный набор:",
+                      listType: "ul",
+                      items: [
+                        "Предварительный осмотр у терапевта.",
+                        "Флюорография не старше 12 месяцев.",
+                        "Заключение психиатра, если должность связана со стерильной зоной.",
+                      ],
+                      note: "Сохраняйте оригиналы - их могут запросить в вузе.",
+                    },
+                    eday: {
+                      lead: "На ЕДО выделяем отдельное окно для студентов.",
+                      itemsTitle: "Что произойдет:",
+                      listType: "ul",
+                      items: [
+                        "Подписание соглашения о стажировке и NDA.",
+                        "Выбор наставника программы \"Взлетная полоса\".",
+                        "Согласование индивидуального расписания смен.",
+                      ],
+                      note: "Возьмите студенческий билет - проверяем его при входе.",
+                    },
+                  },
+                },
+                "fire-rescue": {
+                  label: "Служба противопожарного и аварийно-спасательного обеспечения",
+                  sections: {
+                    docs: {
+                      lead: "Сотрудникам противопожарной службы нужны подтверждения квалификаций.",
+                      itemsTitle: "Обязательно предоставьте:",
+                      listType: "ul",
+                      items: [
+                        "Удостоверение пожарного или спасателя категории не ниже III.",
+                        "Свидетельство о курсах аварийно-спасательных работ.",
+                        "Водительское удостоверение категорий C и CE (копия).",
+                      ],
+                      note: "Если удостоверение просрочено, сообщите заранее - понадобится переаттестация.",
+                    },
+                    medical: {
+                      lead: "Для допуска нужен углубленный медосмотр.",
+                      itemsTitle: "Дополнительные обследования:",
+                      listType: "ul",
+                      items: [
+                        "Кардиостресс-тест и заключение кардиолога.",
+                        "Спиро- и газоанализ для оценки дыхательной системы.",
+                        "Тесты на координацию и реакцию (вестибулярный аппарат).",
+                      ],
+                      note: "Возьмите спортивную форму - часть тестов проходит в тренажерном зале.",
+                    },
+                    eday: {
+                      lead: "ЕДО включает оформление допусков на аварийно-спасательную технику.",
+                      itemsTitle: "Сессии дня:",
+                      listType: "ul",
+                      items: [
+                        "Инструктаж по тактическому развертыванию техники.",
+                        "Назначение пожарной машины и экипажа.",
+                        "Подпись в журнале готовности к аварийным выездам.",
+                      ],
+                      note: "Без отметки инструктора допуск к технике не выдается.",
+                    },
+                  },
+                },
+                "spot-vacancies": {
+                  label: "Точечные вакансии",
+                  sections: {
+                    docs: {
+                      lead: "Для точечных вакансий перечень документов зависит от задачи.",
+                      itemsTitle: "Подготовьте базовый пакет:",
+                      listType: "ul",
+                      items: [
+                        "Актуальное резюме с указанием выбранного проекта.",
+                        "Цифровые копии профильных сертификатов или лицензий.",
+                        "Письмо от руководителя направления с описанием роли.",
+                      ],
+                      note: "Заранее уточните у HR индивидуальные требования.",
+                    },
+                    medical: {
+                      lead: "Маршрут медосмотров формируется индивидуально.",
+                      itemsTitle: "Как правило требуется:",
+                      listType: "ul",
+                      items: [
+                        "Базовый медосмотр и узкие специалисты по запросу руководителя.",
+                        "Психологическое интервью, если нужен доступ в стерильные зоны.",
+                        "Вакцинация или ПЦР по требованию заказчика.",
+                      ],
+                      note: "После выбора вакансии координатор пришлет персональное направление.",
+                    },
+                    eday: {
+                      lead: "На ЕДО для точечных ролей действует ускоренный сценарий.",
+                      itemsTitle: "Ожидайте:",
+                      listType: "ul",
+                      items: [
+                        "Отдельное окно для подписания документов.",
+                        "Настройку доступов в необходимые сервисы (IT, пропуска).",
+                        "Встречу с руководителем для согласования первого рабочего дня.",
+                      ],
+                      note: "Приходите строго к назначенному времени - общую презентацию можно пропустить.",
+                    },
+                  },
+                },
+                apron: {
+                  label: "Служба перронного обслуживания",
+                  sections: {
+                    docs: {
+                      lead: "Персоналу перронного обслуживания нужны подтверждения управления техникой.",
+                      itemsTitle: "Подготовьте:",
+                      listType: "ul",
+                      items: [
+                        "Водительское удостоверение категорий B/C с отметкой о спецтехнике.",
+                        "Протокол обучения по FOD-контролю.",
+                        "Справку об отсутствии наркологических правонарушений.",
+                      ],
+                      note: "Если допуск к спецтехнике нужен, отметьте это в анкете - сформируем группу.",
+                    },
+                    medical: {
+                      lead: "Медосмотры акцентируют внимание на слухе и ночных сменах.",
+                      itemsTitle: "Нужно пройти:",
+                      listType: "ul",
+                      items: [
+                        "Осмотр офтальмолога с проверкой сумеречного зрения.",
+                        "Аудиограмму для оценки слуха рядом с реактивными двигателями.",
+                        "Контроль уровня сахара и давления перед ночными сменами.",
+                      ],
+                      note: "Также выдадим рекомендации по защите слуха.",
+                    },
+                    eday: {
+                      lead: "На ЕДО закрепляем маршруты движения по перрону.",
+                      itemsTitle: "Блоки дня:",
+                      listType: "ul",
+                      items: [
+                        "Инструктаж по схемам руления и безопасности на перроне.",
+                        "Выдача светоотражающих жилетов и раций.",
+                        "Назначение наставника на первую неделю.",
+                      ],
+                      note: "Без отметки о прохождении маршрута доступ на перрон не откроют.",
+                    },
+                  },
+                },
+                aerodrome: {
+                  label: "Аэродромная служба",
+                  sections: {
+                    docs: {
+                      lead: "Аэродромной службе требуются инженерные подтверждения.",
+                      itemsTitle: "Принесите:",
+                      listType: "ul",
+                      items: [
+                        "Диплом авиационного или технического вуза либо профильное удостоверение.",
+                        "Сертификат по эксплуатации ВПП и покрытий (если уже есть).",
+                        "Протокол последней проверки знаний НБА-92.",
+                      ],
+                      note: "Если сертификата нет, подайте заявку на обучение сразу после ЕДО.",
+                    },
+                    medical: {
+                      lead: "Осмотры проверяют готовность к работе на открытом воздухе и в шуме.",
+                      itemsTitle: "Включают:",
+                      listType: "ul",
+                      items: [
+                        "Обследование ЛОР-врача и аудиометрию.",
+                        "Тест на устойчивость к температурным перепадам у терапевта.",
+                        "Психофизиологическое тестирование на внимание.",
+                      ],
+                      note: "Результаты действуют 12 месяцев - сохраните копии.",
+                    },
+                    eday: {
+                      lead: "ЕДО дополняется техническим брифингом.",
+                      itemsTitle: "План:",
+                      listType: "ul",
+                      items: [
+                        "Разбор регламентов содержания ВПП с инженером службы.",
+                        "Подписание допусков к аэродромной спецтехнике.",
+                        "Планирование графика дежурств и ночных проверок.",
+                      ],
+                      note: "После ЕДО запланируйте вводный обход аэродрома (около двух часов).",
+                    },
+                  },
+                },
+              };
+
+              const renderSection = (sectionData, stageKey, serviceLabel) => {
+                if (!sectionData) {
+                  return "";
+                }
+                const fragments = [];
+                const title = stageTitles[stageKey];
+                if (title) {
+                  fragments.push(`<h3>${title} — ${serviceLabel}</h3>`);
+                }
+                if (sectionData.lead) {
+                  fragments.push(`<p class="section-lead">${sectionData.lead}</p>`);
+                }
+                if (sectionData.itemsTitle) {
+                  fragments.push(`<p class="list-header">${sectionData.itemsTitle}</p>`);
+                }
+                if (Array.isArray(sectionData.items) && sectionData.items.length) {
+                  const tag = sectionData.listType === "ol" ? "ol" : "ul";
+                  const listItems = sectionData.items.map((item) => `<li>${item}</li>`).join("");
+                  fragments.push(`<${tag} class="list">${listItems}</${tag}>`);
+                }
+                if (sectionData.note) {
+                  fragments.push(`<p class="section-note">${sectionData.note}</p>`);
+                }
+                return fragments.join("");
+              };
+
+              const updateSections = (serviceKey) => {
+                const fallbackKey = Object.keys(serviceData)[0];
+                const data = serviceData[serviceKey] || serviceData[fallbackKey];
+                Object.entries(sectionTargets).forEach(([stageKey, element]) => {
+                  element.innerHTML = renderSection(
+                    data.sections[stageKey],
+                    stageKey,
+                    data.label
+                  );
+                });
+                if (serviceCaption) {
+                  serviceCaption.textContent = data.label;
+                }
+              };
+
+              serviceSelector.addEventListener("change", (event) => {
+                updateSections(event.target.value);
+              });
+
+              const initialKey = serviceSelector.value || Object.keys(serviceData)[0];
+              updateSections(initialKey);
+            })();
           (function () {
             const toggle = document.getElementById("toggle-ediny-den");
             const targetSection1 = document.getElementById("ediny-den-oformleniya");
