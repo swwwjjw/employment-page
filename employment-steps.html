@@ -362,114 +362,180 @@
             updateVisibility();
           })();
 
-          (function () {
-            const select = document.getElementById("department-select");
-            const sectionNodes = document.querySelectorAll("[data-section-content]");
-            if (!select || !sectionNodes.length) {
-              return;
-            }
-
-            const sectionTargets = Array.from(sectionNodes).reduce((acc, node) => {
-              const key = node.getAttribute("data-section-content");
-              if (key) {
-                acc[key] = node;
-              }
-              return acc;
-            }, {});
-
-            const getContextBlock = (departmentLabel) =>
-              `<p class="section-context">Информация для: <span>${departmentLabel}</span></p>`;
-
-            const sectionTemplates = {
-              "poluchenie-spravok-iz-gos-organov": (departmentLabel) => `
-                ${getContextBlock(departmentLabel)}
-                <p class="list-header">На данном этапе необходимо получить:</p>
-                <ul class="list">
-                  <li>Справку об отсутствии судимости;</li>
-                  <li>Справку об отсутствии административных правонарушений за употребление наркотических веществ (для операторов службы досмотра);</li>
-                  <li>Выписку из электронной трудовой книжки (СТДР);</li>
-                  <li>Выписку из реестра ИНН;</li>
-                  <li>Справку об обучении в ВУЗе (для студентов);</li>
-                </ul>
-                <p class="list-header">Где можно заказать:</p>
-                <ul class="list">
-                  <li>На Госуслугах (в электронном виде);</li>
-                  <li>В МФЦ;</li>
-                  <li>В местном отделении полиции;</li>
-                </ul>
-                <a class="ref-button" href="https://t.me/LedHr_bot" target="_blank" rel="noopener noreferrer">
-                  Бот для отправки документов
-                </a>
-              `,
-              "prohozhdenie-medosmotr": (departmentLabel) => `
-                ${getContextBlock(departmentLabel)}
-                <p class="list-header">На данном этапе необходимо:</p>
-                <ol class="list">
-                  <li>Пройти предварительный медицинский осмотр;</li>
-                  <li>Получить справку с флюорографией;</li>
-                  <li>Пройти психиатрическое освидетельствование;</li>
-                </ol>
-                <p class="list-header">Где пройти осмотры и получить справки?</p>
-                <ol class="list">
-                  <li><a href="https://yandex.ru/maps/-/CLS7FYyY">Предварительный медицинский осмотр и флюорография;</a></li>
-                  <li><a href="https://yandex.ru/maps/-/CLS7b8P8">Психиатрическое освидетельствование;</a></li>
-                </ol>
-                <p class="attention">Обязательно проверьте следующие пункты для справки с флюорографией:</p>
-                <img src="medosmotr.png" alt="Памятка ФЛГ" />
-              `,
-              "ediny-den-oformleniya": (departmentLabel) => `
-                ${getContextBlock(departmentLabel)}
-                <p class="attention">Запишитесь на удобную для вас дату:</p>
-                <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
-                  Запись на Единый день оформления
-                </a>
-                <p class="list-header">Перепроверьте список необходимых документов:</p>
-                <ul class="list">
-                  <li><b>Оригинал</b> паспорта;</li>
-                  <li>ИНН;</li>
-                  <li><b>Оригинал</b> СНИЛС;</li>
-                  <li><b>Оригинал</b> документа об образовании (для студентов - справка об обучении);</li>
-                  <li><b>Оригинал</b> трудовой книжки (если есть);</li>
-                  <li>Выписка из электронной трудовой книжки (СТДР) (<b>Должна быть свежей - 1-2 дня до трудоустройства</b>);</li>
-                  <li>2 фото 3*4 см;</li>
-                  <li>Заключение ФЛГ (<b>Должны быть подпись и печать врача, печать мед. организации</b>)</li>
-                  <li>Справка об отсутствии судимости;</li>
-                  <li>Справка об отсутствии административных правонарушений за употребление наркотических веществ (для инспекторов по досмотру);</li>
-                  <li>Анкета нового сотрудника (<b>Должна быть заполнена синей ручкой</b>);</li>
-                  <li><b>Оригинал</b> свидетельства о браке/рождении детей/перемене имени (при наличии);</li>
-                  <li><b>Оригинал</b> приписного удостоверения или военного билета (<b>Будущий сотрудник должен состоять на военном учете в военкомате Санкт-Петербурга</b>);</li>
-                  <li><b>Оригинал</b> водительского удостоверения (если требуется по должности)</li>
-                </ul>
-                <p class="list-header">Программа единого дня оформления:</p>
-                <ul class="list">
-                  <li>Сбор в кабинете 410;</li>
-                  <li>Просмотр дополнительных инструктажей, проверка собранных документов;</li>
-                  <li>Подписание договора в кабинете 423;</li>
-                  <li>Постановка на воинский учет в кабинете 419;</li>
-                  <li>Фото на пропуск в кабинете 202, окно 1. <b>Строго с 14:00 до 14:30</b>;</li>
-                  <li>Подписание заявления на выбор зарплатной карты и служебной парковки;</li>
-                </ul>
-              `,
-            };
-
-            const renderSections = () => {
-              const selectedOption =
-                select.options[select.selectedIndex] || select.options[0];
-              if (!selectedOption) {
+            (function () {
+              const select = document.getElementById("department-select");
+              const sectionNodes = document.querySelectorAll("[data-section-content]");
+              if (!select || !sectionNodes.length) {
                 return;
               }
-              const departmentLabel = selectedOption.textContent.trim();
-              Object.entries(sectionTemplates).forEach(([sectionId, template]) => {
-                const target = sectionTargets[sectionId];
-                if (target) {
-                  target.innerHTML = template(departmentLabel).trim();
-                }
-              });
-            };
 
-            select.addEventListener("change", renderSections);
-            renderSections();
-          })();
+              const sectionTargets = Array.from(sectionNodes).reduce((acc, node) => {
+                const key = node.getAttribute("data-section-content");
+                if (key) {
+                  acc[key] = node;
+                }
+                return acc;
+              }, {});
+
+              const getContextBlock = (departmentLabel) =>
+                `<p class="section-context">Информация для: <span>${departmentLabel}</span></p>`;
+
+              const sectionDefaultBodies = {
+                "poluchenie-spravok-iz-gos-organov": () => `
+                  <p class="list-header">На данном этапе необходимо получить:</p>
+                  <ul class="list">
+                    <li>Справку об отсутствии судимости;</li>
+                    <li>Справку об отсутствии административных правонарушений за употребление наркотических веществ (для операторов службы досмотра);</li>
+                    <li>Выписку из электронной трудовой книжки (СТДР);</li>
+                    <li>Выписку из реестра ИНН;</li>
+                    <li>Справку об обучении в ВУЗе (для студентов);</li>
+                  </ul>
+                  <p class="list-header">Где можно заказать:</p>
+                  <ul class="list">
+                    <li>На Госуслугах (в электронном виде);</li>
+                    <li>В МФЦ;</li>
+                    <li>В местном отделении полиции;</li>
+                  </ul>
+                  <a class="ref-button" href="https://t.me/LedHr_bot" target="_blank" rel="noopener noreferrer">
+                    Бот для отправки документов
+                  </a>
+                `,
+                "prohozhdenie-medosmotr": () => `
+                  <p class="list-header">На данном этапе необходимо:</p>
+                  <ol class="list">
+                    <li>Пройти предварительный медицинский осмотр;</li>
+                    <li>Получить справку с флюорографией;</li>
+                    <li>Пройти психиатрическое освидетельствование;</li>
+                  </ol>
+                  <p class="list-header">Где пройти осмотры и получить справки?</p>
+                  <ol class="list">
+                    <li><a href="https://yandex.ru/maps/-/CLS7FYyY">Предварительный медицинский осмотр и флюорография;</a></li>
+                    <li><a href="https://yandex.ru/maps/-/CLS7b8P8">Психиатрическое освидетельствование;</a></li>
+                  </ol>
+                  <p class="attention">Обязательно проверьте следующие пункты для справки с флюорографией:</p>
+                  <img src="medosmotr.png" alt="Памятка ФЛГ" />
+                `,
+                "ediny-den-oformleniya": () => `
+                  <p class="attention">Запишитесь на удобную для вас дату:</p>
+                  <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
+                    Запись на Единый день оформления
+                  </a>
+                  <p class="list-header">Перепроверьте список необходимых документов:</p>
+                  <ul class="list">
+                    <li><b>Оригинал</b> паспорта;</li>
+                    <li>ИНН;</li>
+                    <li><b>Оригинал</b> СНИЛС;</li>
+                    <li><b>Оригинал</b> документа об образовании (для студентов - справка об обучении);</li>
+                    <li><b>Оригинал</b> трудовой книжки (если есть);</li>
+                    <li>Выписка из электронной трудовой книжки (СТДР) (<b>Должна быть свежей - 1-2 дня до трудоустройства</b>);</li>
+                    <li>2 фото 3*4 см;</li>
+                    <li>Заключение ФЛГ (<b>Должны быть подпись и печать врача, печать мед. организации</b>)</li>
+                    <li>Справка об отсутствии судимости;</li>
+                    <li>Справка об отсутствии административных правонарушений за употребление наркотических веществ (для инспекторов по досмотру);</li>
+                    <li>Анкета нового сотрудника (<b>Должна быть заполнена синей ручкой</b>);</li>
+                    <li><b>Оригинал</b> свидетельства о браке/рождении детей/перемене имени (при наличии);</li>
+                    <li><b>Оригинал</b> приписного удостоверения или военного билета (<b>Будущий сотрудник должен состоять на военном учете в военкомате Санкт-Петербурга</b>);</li>
+                    <li><b>Оригинал</b> водительского удостоверения (если требуется по должности)</li>
+                  </ul>
+                  <p class="list-header">Программа единого дня оформления:</p>
+                  <ul class="list">
+                    <li>Сбор в кабинете 410;</li>
+                    <li>Просмотр дополнительных инструктажей, проверка собранных документов;</li>
+                    <li>Подписание договора в кабинете 423;</li>
+                    <li>Постановка на воинский учет в кабинете 419;</li>
+                    <li>Фото на пропуск в кабинете 202, окно 1. <b>Строго с 14:00 до 14:30</b>;</li>
+                    <li>Подписание заявления на выбор зарплатной карты и служебной парковки;</li>
+                  </ul>
+                `,
+              };
+
+              /**
+               * Хранилище индивидуальных блоков по связке «раздел + служба».
+               * Добавьте нужную запись и укажите режим объединения:
+               *  - replace (по умолчанию) полностью заменит стандартный текст
+               *  - append добавит блок после стандартного текста
+               *  - prepend добавит блок перед стандартным текстом
+               *
+               * Пример:
+               * departmentSectionContent["poluchenie-spravok-iz-gos-organov"] = {
+               *   "initial-training": {
+               *     mode: "append",
+               *     template: ({ departmentLabel }) => `
+               *       <p class="attention">Индивидуальные шаги для ${departmentLabel}</p>
+               *     `,
+               *   },
+               * };
+               */
+              const departmentSectionContent = {
+                "poluchenie-spravok-iz-gos-organov": {},
+                "prohozhdenie-medosmotr": {},
+                "ediny-den-oformleniya": {},
+              };
+
+              const renderTemplate = (template, context) => {
+                if (typeof template === "function") {
+                  return template(context);
+                }
+                return typeof template === "string" ? template : "";
+              };
+
+              const buildSectionBody = (sectionId, context) => {
+                const baseTemplate = sectionDefaultBodies[sectionId];
+                const baseContent = baseTemplate ? baseTemplate(context).trim() : "";
+
+                const departmentConfig =
+                  departmentSectionContent[sectionId]?.[context.departmentValue];
+
+                if (!departmentConfig) {
+                  return baseContent;
+                }
+
+                const { mode = "replace", template } = departmentConfig;
+                const customContent = renderTemplate(template, context).trim();
+
+                if (!customContent) {
+                  return baseContent;
+                }
+
+                if (!baseContent) {
+                  return customContent;
+                }
+
+                switch (mode) {
+                  case "prepend":
+                    return `${customContent}\n${baseContent}`.trim();
+                  case "append":
+                    return `${baseContent}\n${customContent}`.trim();
+                  default:
+                    return customContent;
+                }
+              };
+
+              const renderSections = () => {
+                const selectedOption =
+                  select.options[select.selectedIndex] || select.options[0];
+                if (!selectedOption) {
+                  return;
+                }
+
+                const context = {
+                  departmentValue: selectedOption.value,
+                  departmentLabel: selectedOption.textContent.trim(),
+                };
+
+                Object.entries(sectionTargets).forEach(([sectionId, target]) => {
+                  const body = buildSectionBody(sectionId, context);
+                  const contextBlock = getContextBlock(context.departmentLabel);
+
+                  target.innerHTML = body
+                    ? `${contextBlock}\n${body}`
+                    : contextBlock;
+                });
+              };
+
+              select.addEventListener("change", renderSections);
+              renderSections();
+            })();
 
           (function () {
             const toolbar = document.querySelector(".toolbar");
