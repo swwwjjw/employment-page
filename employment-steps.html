@@ -132,6 +132,59 @@
           margin-top: 0vh;
           margin-bottom: 5.19vh;
       }
+        
+        .department-selector {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.84vw;
+          margin-bottom: 5.19vh;
+          padding: 1.67vh 1.4vw;
+        background-color: #ffffff;
+          border-radius: 0.63vw;
+          box-shadow: 0 0.74vh 1.85vh rgba(31, 42, 68, 0.06);
+        }
+
+        .department-selector label {
+          font-weight: 600;
+          color: #1f2a44;
+        }
+
+        .department-selector select {
+          flex: 1;
+          min-width: 16vw;
+          padding: 1.1vh 0.9vw;
+          border: 0.09vh solid #d9e2ef;
+          border-radius: 0.42vw;
+        background-color: #f6f8fb;
+          color: #1f2a44;
+          font-size: 1rem;
+        }
+
+        .department-selector select:focus-visible {
+          outline: 0.19vh solid #229ed9;
+          outline-offset: 0.19vh;
+        }
+
+        .section-content {
+          margin-top: 1.85vh;
+        }
+
+        .section-content > * + * {
+          margin-top: 1.11vh;
+        }
+
+        .section-context {
+          margin: 0;
+          padding: 0.93vh 1.1vw;
+          border-left: 0.35vw solid #229ed9;
+          background-color: #f0f6fc;
+          font-weight: 600;
+        }
+
+        .section-context span {
+          color: #229ed9;
+        }
 
         .step-card {
           display: block;
@@ -212,6 +265,21 @@
         <a class="step-card" href="#poluchenie-propuska-i-zarplatnoy-karty">06. Получение пропуска и зарплатной карты</a>
       </nav>
 
+        <div class="department-selector">
+          <label for="department-select">Выберите службу:</label>
+          <select id="department-select" aria-label="Выбор службы">
+            <option value="initial-training" selected>Группа начальной подготовки</option>
+            <option value="baggage-service">Служба обработки багажа</option>
+            <option value="aircraft-maintenance">Служба бытового обслуживания воздушных судов</option>
+            <option value="passenger-service">Служба пассажирских перевозок</option>
+            <option value="student-project">Студенческий проект "Взлетная полоса"</option>
+            <option value="fire-rescue-service">Служба противопожарного и аварийно-спасательного обеспечения</option>
+            <option value="targeted-vacancies">Точечные вакансии</option>
+            <option value="apron-service">Служба перронного обслуживания</option>
+            <option value="aerodrome-service">Аэродромная служба</option>
+          </select>
+        </div>
+
       <section id="podpisanie-zayavleniya">
         <h2>01. Подписание заявления</h2>
         <p class="list-header">На данном этапе необходимо:</p>
@@ -229,46 +297,12 @@
 
       <section id="poluchenie-spravok-iz-gos-organov">
         <h2>02. Получение справок из гос. органов</h2>
-        <p class="list-header">На данном этапе необходимо получить:</p>
-        <ul class="list">
-          <li>Справку об отсутствии судимости;</li>
-          <li>Справку об отсутствии административных правонарушений за употребление наркотических веществ (для операторов службы досмотра);</li>
-          <li>Выписку из электронной трудовой книжки (СТДР);</li>
-          <li>Выписку из реестра ИНН;</li>
-          <li>Справку об обучении в ВУЗе (для студентов);</li>
-        </ul>
-        <p class="list-header">Где можно заказать:</p>
-        <ul class="list">
-          <li>На Госуслугах (в электронном виде);</li>
-          <li>В МФЦ;</li>
-          <li>В местном отделении полиции;</li>
-        </ul>
-        <a class="ref-button" href="https://t.me/LedHr_bot" target="_blank" rel="noopener noreferrer">
-        Бот для отправки документов
-        </a>
+        <div class="section-content" data-section-content="poluchenie-spravok-iz-gos-organov"></div>
       </section>
 
       <section id="prohozhdenie-medosmotr">
         <h2>03. Прохождение медосмотров</h2>
-        <p class="list-header">На данном этапе необходимо:</p>
-        <ol class="list">
-          <li>Пройти предварительный медицинский осмотр;</li>
-          <li>Получить справку с флюорографией;</li>
-          <li>Пройти психиатрическое освидетельствование;</li>
-        </ol>
-        <p class="list-header">Где пройти осмотры и получить справки?</p>
-        <ol class="list">
-          <li><a href="https://yandex.ru/maps/-/CLS7FYyY">Предварительный медицинский осмотр и флюорография;</a></li>
-          <li><a href="https://yandex.ru/maps/-/CLS7b8P8">Психиатрическое освидетельствование;</a></li>
-        </ol>
-        <p class="attention">Обязательно проверьте следующие пункты для справки с флюорографией:</p>
-        <!--<ol class="list">
-          <li>Есть печать медицинской организации с указанием реквизитов;</li>
-          <li>Справка действительна 1 год с даты прохождения флюорографии;</li>
-          <li>Указан результат флюорографии в виде штампа или записи врача;</li>
-          <li>Есть печать и подпись врача;</li>
-        </ol>-->
-        <img src="medosmotr.png" alt="Памятка ФЛГ"/>
+        <div class="section-content" data-section-content="prohozhdenie-medosmotr"></div>
       </section>
 
       <section id="prohozhdenie-onlayn-instruktazh">
@@ -302,36 +336,7 @@
 
       <section id="ediny-den-oformleniya" hidden>
         <h2>05. Единый день оформления</h2>
-        <p class="attention">Запишитесь на удобную для вас дату:</p>
-        <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
-        Запись на Единый день оформления
-        </a>
-        <p class="list-header">Перепроверьте список необходимых документов:</p>
-        <ul class="list">
-          <li><b>Оригинал</b> паспорта;</li>
-          <li>ИНН;</li>
-          <li><b>Оригинал</b> СНИЛС;</li>
-          <li><b>Оригинал</b> документа об образовании (для студентов - справка об обучении);</li>
-          <li><b>Оригинал</b> трудовой книжки (если есть);</li>
-          <li>Выписка из электронной трудовой книжки (СТДР) (<b>Должна быть свежей - 1-2 дня до трудоустройства</b>);</li>
-          <li>2 фото 3*4 см;</li>
-          <li>Заключение ФЛГ (<b>Должны быть подпись и печать врача, печать мед. организации</b>)</li>
-          <li>Справка об отсутствии судимости;</li>
-          <li>Справка об отсутствии административных правонарушений за употребление наркотических веществ (для инспекторов по досмотру);</li>
-          <li>Анкета нового сотрудника (<b>Должна быть заполнена синей ручкой</b>);</li>
-          <li><b>Оригинал</b> свидетельства о браке/рождении детей/перемене имени (при наличии);</li>
-          <li><b>Оригинал</b> приписного удостоверения или военного билета (<b>Будущий сотрудник должен состоять на военном учете в военкомате Санкт-Петербурга</b>);</li>
-          <li><b>Оригинал</b> водительского удостоверения (если требуется по должности)</li>
-        </ul>
-        <p class="list-header">Программа единого дня оформления:</p>
-        <ul class="list">
-          <li>Сбор в кабинете 410;</li>
-          <li>Просмотр дополнительных инструктажей, проверка собранных документов;</li>
-          <li>Подписание договора в кабинете 423;</li>
-          <li>Постановка на воинский учет в кабинете 419;</li>
-          <li>Фото на пропуск в кабинете 202, окно 1. <b>Строго с 14:00 до 14:30</b>;</li>
-          <li>Подписание заявления на выбор зарплатной карты и служебной парковки;</li>
-        </ul>
+        <div class="section-content" data-section-content="ediny-den-oformleniya"></div>
       </section>
 
       <section id="poluchenie-propuska-i-zarplatnoy-karty" hidden>
@@ -355,6 +360,115 @@
             };
             toggle.addEventListener("change", updateVisibility);
             updateVisibility();
+          })();
+
+          (function () {
+            const select = document.getElementById("department-select");
+            const sectionNodes = document.querySelectorAll("[data-section-content]");
+            if (!select || !sectionNodes.length) {
+              return;
+            }
+
+            const sectionTargets = Array.from(sectionNodes).reduce((acc, node) => {
+              const key = node.getAttribute("data-section-content");
+              if (key) {
+                acc[key] = node;
+              }
+              return acc;
+            }, {});
+
+            const getContextBlock = (departmentLabel) =>
+              `<p class="section-context">Информация для: <span>${departmentLabel}</span></p>`;
+
+            const sectionTemplates = {
+              "poluchenie-spravok-iz-gos-organov": (departmentLabel) => `
+                ${getContextBlock(departmentLabel)}
+                <p class="list-header">На данном этапе необходимо получить:</p>
+                <ul class="list">
+                  <li>Справку об отсутствии судимости;</li>
+                  <li>Справку об отсутствии административных правонарушений за употребление наркотических веществ (для операторов службы досмотра);</li>
+                  <li>Выписку из электронной трудовой книжки (СТДР);</li>
+                  <li>Выписку из реестра ИНН;</li>
+                  <li>Справку об обучении в ВУЗе (для студентов);</li>
+                </ul>
+                <p class="list-header">Где можно заказать:</p>
+                <ul class="list">
+                  <li>На Госуслугах (в электронном виде);</li>
+                  <li>В МФЦ;</li>
+                  <li>В местном отделении полиции;</li>
+                </ul>
+                <a class="ref-button" href="https://t.me/LedHr_bot" target="_blank" rel="noopener noreferrer">
+                  Бот для отправки документов
+                </a>
+              `,
+              "prohozhdenie-medosmotr": (departmentLabel) => `
+                ${getContextBlock(departmentLabel)}
+                <p class="list-header">На данном этапе необходимо:</p>
+                <ol class="list">
+                  <li>Пройти предварительный медицинский осмотр;</li>
+                  <li>Получить справку с флюорографией;</li>
+                  <li>Пройти психиатрическое освидетельствование;</li>
+                </ol>
+                <p class="list-header">Где пройти осмотры и получить справки?</p>
+                <ol class="list">
+                  <li><a href="https://yandex.ru/maps/-/CLS7FYyY">Предварительный медицинский осмотр и флюорография;</a></li>
+                  <li><a href="https://yandex.ru/maps/-/CLS7b8P8">Психиатрическое освидетельствование;</a></li>
+                </ol>
+                <p class="attention">Обязательно проверьте следующие пункты для справки с флюорографией:</p>
+                <img src="medosmotr.png" alt="Памятка ФЛГ" />
+              `,
+              "ediny-den-oformleniya": (departmentLabel) => `
+                ${getContextBlock(departmentLabel)}
+                <p class="attention">Запишитесь на удобную для вас дату:</p>
+                <a class="ref-button" href="https://n1851045.yclients.com" target="_blank" rel="noopener noreferrer">
+                  Запись на Единый день оформления
+                </a>
+                <p class="list-header">Перепроверьте список необходимых документов:</p>
+                <ul class="list">
+                  <li><b>Оригинал</b> паспорта;</li>
+                  <li>ИНН;</li>
+                  <li><b>Оригинал</b> СНИЛС;</li>
+                  <li><b>Оригинал</b> документа об образовании (для студентов - справка об обучении);</li>
+                  <li><b>Оригинал</b> трудовой книжки (если есть);</li>
+                  <li>Выписка из электронной трудовой книжки (СТДР) (<b>Должна быть свежей - 1-2 дня до трудоустройства</b>);</li>
+                  <li>2 фото 3*4 см;</li>
+                  <li>Заключение ФЛГ (<b>Должны быть подпись и печать врача, печать мед. организации</b>)</li>
+                  <li>Справка об отсутствии судимости;</li>
+                  <li>Справка об отсутствии административных правонарушений за употребление наркотических веществ (для инспекторов по досмотру);</li>
+                  <li>Анкета нового сотрудника (<b>Должна быть заполнена синей ручкой</b>);</li>
+                  <li><b>Оригинал</b> свидетельства о браке/рождении детей/перемене имени (при наличии);</li>
+                  <li><b>Оригинал</b> приписного удостоверения или военного билета (<b>Будущий сотрудник должен состоять на военном учете в военкомате Санкт-Петербурга</b>);</li>
+                  <li><b>Оригинал</b> водительского удостоверения (если требуется по должности)</li>
+                </ul>
+                <p class="list-header">Программа единого дня оформления:</p>
+                <ul class="list">
+                  <li>Сбор в кабинете 410;</li>
+                  <li>Просмотр дополнительных инструктажей, проверка собранных документов;</li>
+                  <li>Подписание договора в кабинете 423;</li>
+                  <li>Постановка на воинский учет в кабинете 419;</li>
+                  <li>Фото на пропуск в кабинете 202, окно 1. <b>Строго с 14:00 до 14:30</b>;</li>
+                  <li>Подписание заявления на выбор зарплатной карты и служебной парковки;</li>
+                </ul>
+              `,
+            };
+
+            const renderSections = () => {
+              const selectedOption =
+                select.options[select.selectedIndex] || select.options[0];
+              if (!selectedOption) {
+                return;
+              }
+              const departmentLabel = selectedOption.textContent.trim();
+              Object.entries(sectionTemplates).forEach(([sectionId, template]) => {
+                const target = sectionTargets[sectionId];
+                if (target) {
+                  target.innerHTML = template(departmentLabel).trim();
+                }
+              });
+            };
+
+            select.addEventListener("change", renderSections);
+            renderSections();
           })();
 
           (function () {
