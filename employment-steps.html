@@ -21,6 +21,16 @@
         font-display: swap;
       }
 
+      :root {
+        --color-navy: #18317e;
+        --color-royal: #294da5;
+        --color-amber: #ea9d44;
+        --color-background: #f5f7ff;
+        --color-surface: #ffffff;
+        --color-border: rgba(24, 49, 126, 0.18);
+        --color-muted: rgba(24, 49, 126, 0.7);
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -28,8 +38,8 @@
       body {
         margin: 0;
         font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-        color: #1f2a44;
-        background-color: #f6f8fb;
+        color: var(--color-navy);
+        background-color: var(--color-background);
         line-height: 1.6;
       }
 
@@ -40,8 +50,8 @@
           align-items: center;
           justify-content: space-between;
           padding: 1.8vh 1.7vw;
-          background-color: #ffffff;
-          border-bottom: 0.09vh solid #d9e2ef;
+          background: linear-gradient(135deg, var(--color-navy), var(--color-royal));
+          border-bottom: 0.09vh solid rgba(234, 157, 68, 0.35);
           position: sticky;
           top: 0;
           z-index: 10;
@@ -66,9 +76,9 @@
         justify-content: center;
           width: 8.33vw;
           height: 4.44vh;
-          border: 0.19vh dashed #8aa0c7;
+          border: 0.19vh dashed rgba(24, 49, 126, 0.35);
           border-radius: 0.42vw;
-        color: #8aa0c7;
+        color: rgba(24, 49, 126, 0.75);
         font-weight: 600;
       }
 
@@ -77,8 +87,8 @@
           align-items: center;
           gap: 0.42vw;
           padding: 1.3vh 1.4vw;
-        background-color: #229ed9;
-        color: #ffffff;
+        background-color: var(--color-amber);
+        color: var(--color-navy);
         text-decoration: none;
           border-radius: 1.25vw;
         font-weight: 600;
@@ -86,7 +96,8 @@
       }
 
       .telegram-button:hover {
-        background-color: #1a87ba;
+        background-color: var(--color-royal);
+        color: #ffffff;
       }
 
         .ref-button {
@@ -96,8 +107,8 @@
           padding: 0.45vh 0.85vw;
           margin-top: 0.56vh;
           margin-bottom: 0vh;
-        background-color: #229ed9;
-        color: #ffffff;
+        background-color: var(--color-amber);
+        color: var(--color-navy);
         text-decoration: none;
           border-radius: 1.25vw;
         font-weight: 600;
@@ -105,26 +116,27 @@
       }
 
       .ref-button:hover {
-        background-color: #1a87ba;
+        background-color: var(--color-royal);
+        color: #ffffff;
       }
 
         .list {
           margin-top: 0vh;
           margin-bottom: 0vh;
-        color: #51647c;
+        color: var(--color-muted);
       }
 
         .attention {
           margin-top: 0vh;
           margin-bottom: 0vh;
-        color: #229ed9;
+        color: var(--color-amber);
         font-weight: bold;
       }
 
         .list-header {
           margin-top: 0vh;
           margin-bottom: 0vh;
-        color: #1a87ba;
+        color: var(--color-royal);
       }
 
         main {
@@ -156,29 +168,29 @@
           gap: 0.84vw;
           margin-bottom: 5.19vh;
           padding: 1.67vh 1.4vw;
-        background-color: #ffffff;
+        background-color: var(--color-surface);
           border-radius: 0.63vw;
-          box-shadow: 0 0.74vh 1.85vh rgba(31, 42, 68, 0.06);
+          box-shadow: 0 0.74vh 1.85vh rgba(24, 49, 126, 0.08);
         }
 
         .department-selector label {
           font-weight: 600;
-          color: #1f2a44;
+          color: var(--color-navy);
         }
 
         .department-selector select {
           flex: 1;
           min-width: 16vw;
           padding: 1.1vh 0.9vw;
-          border: 0.09vh solid #d9e2ef;
+          border: 0.09vh solid var(--color-border);
           border-radius: 0.42vw;
-        background-color: #f6f8fb;
-          color: #1f2a44;
+        background-color: rgba(41, 77, 165, 0.05);
+          color: var(--color-navy);
           font-size: 1rem;
         }
 
         .department-selector select:focus-visible {
-          outline: 0.19vh solid #229ed9;
+          outline: 0.19vh solid var(--color-amber);
           outline-offset: 0.19vh;
         }
 
@@ -193,21 +205,22 @@
         .section-context {
           margin: 0;
           padding: 0.93vh 1.1vw;
-          border-left: 0.35vw solid #229ed9;
-          background-color: #f0f6fc;
+          border-left: 0.35vw solid var(--color-amber);
+          background-color: rgba(234, 157, 68, 0.08);
           font-weight: 600;
         }
 
         .section-context span {
-          color: #229ed9;
+          color: var(--color-amber);
         }
 
         .step-card {
           display: block;
           padding: 2.2vh 1.4vw;
-        background-color: #ffffff;
+        background-color: var(--color-surface);
           border-radius: 0.63vw;
-          box-shadow: 0 0.93vh 2.31vh rgba(31, 42, 68, 0.08);
+          box-shadow: 0 0.93vh 2.31vh rgba(24, 49, 126, 0.12);
+        border-top: 0.28vh solid var(--color-amber);
         text-decoration: none;
         color: inherit;
         font-weight: 600;
@@ -217,27 +230,28 @@
 
       .step-card:hover {
           transform: translateY(-0.37vh);
-          box-shadow: 0 1.67vh 2.96vh rgba(31, 42, 68, 0.12);
+          box-shadow: 0 1.67vh 2.96vh rgba(24, 49, 126, 0.18);
       }
 
         section {
           margin-bottom: 5.19vh;
           padding: 2.7vh 2.2vw;
-        background-color: #ffffff;
+        background-color: var(--color-surface);
           border-radius: 0.63vw;
-          box-shadow: 0 0.74vh 1.85vh rgba(31, 42, 68, 0.06);
+          box-shadow: 0 0.74vh 1.85vh rgba(24, 49, 126, 0.08);
       }
 
         section h2 {
           margin-top: 0vh;
           margin-bottom: 0vh;
         font-size: 1.75rem;
+        color: var(--color-royal);
       }
 
         section p {
           margin-top: 0vh;
           margin-bottom: 0vh;
-        color: #51647c;
+        color: var(--color-muted);
       }
 
         .section-toggle {
@@ -246,17 +260,17 @@
           gap: 0.42vw;
           margin: 1.85vh 0vw 0vh;
           padding: 1.3vh 1.1vw;
-          border: 0.09vh solid #d9e2ef;
+          border: 0.09vh solid var(--color-border);
           border-radius: 0.42vw;
-        background-color: #f6f8fb;
+        background-color: rgba(41, 77, 165, 0.05);
         font-weight: 600;
-        color: #1f2a44;
+        color: var(--color-navy);
       }
 
         .section-toggle input[type="checkbox"] {
           width: 1.67vh;
           height: 1.67vh;
-        accent-color: #229ed9;
+        accent-color: var(--color-amber);
       }
 
     </style>
