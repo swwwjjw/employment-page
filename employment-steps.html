@@ -214,25 +214,6 @@
           color: var(--color-amber);
         }
 
-        .step-card {
-          display: block;
-          padding: 2.2vh 1.4vw;
-        background-color: var(--color-surface);
-          border-radius: 0.63vw;
-          box-shadow: 0 0.93vh 2.31vh rgba(24, 49, 126, 0.12);
-        border-top: 0.28vh solid var(--color-amber);
-        text-decoration: none;
-        color: inherit;
-        font-weight: 600;
-        text-align: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .step-card:hover {
-          transform: translateY(-0.37vh);
-          box-shadow: 0 1.67vh 2.96vh rgba(24, 49, 126, 0.18);
-      }
-
         section {
           margin-bottom: 5.19vh;
           padding: 2.7vh 2.2vw;
@@ -307,21 +288,12 @@
     <header class="toolbar">
       <img src="logotip-pulkovo.png" alt="Пулково Аэропорт логотип"/>
       <a class="telegram-button" href="https:/t.me/preboarding_pulkovo" target="_blank" rel="noopener noreferrer">
-        Связь с отделом персонала
+        Связь с отделом подбора
       </a>
     </header>
 
     <main>
       <h1>ШАГИ ТРУДОУСТРОЙСТВА</h1>
-
-      <nav class="steps-grid" aria-label="Шаги трудоустройства">
-        <a class="step-card" href="#podpisanie-zayavleniya">01. Подписание заявления</a>
-        <a class="step-card" href="#poluchenie-spravok-iz-gos-organov">02. Получение справок из гос. органов</a>
-        <a class="step-card" href="#prohozhdenie-medosmotr">03. Прохождение медосмотров</a>
-        <a class="step-card" href="#prohozhdenie-onlayn-instruktazh">04. Прохождение онлайн инструктажей</a>
-        <a class="step-card" href="#ediny-den-oformleniya">05. Единый день оформления</a>
-        <a class="step-card" href="#poluchenie-propuska-i-zarplatnoy-karty">06. Получение пропуска и зарплатной карты</a>
-      </nav>
 
         <div class="department-selector">
           <label for="department-select">Выберите службу:</label>
@@ -361,7 +333,6 @@
         >
           <p class="list-header">На данном этапе необходимо:</p>
           <ul class="list">
-            <li>Заполнить заявление о приеме;</li>
             <li>Получить направление на предварительный медицинский осмотр;</li>
             <li>Получить направление на обязательное психиатрическое освидетельствование;</li>
             <li>Проконсультироваться в военно-учетном столе (каб. 419);</li>
