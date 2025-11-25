@@ -226,11 +226,27 @@
         font-weight: 600;
         text-align: center;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
       }
 
       .step-card:hover {
           transform: translateY(-0.37vh);
           box-shadow: 0 1.67vh 2.96vh rgba(24, 49, 126, 0.18);
+      }
+
+      .step-card[aria-expanded="true"] {
+          border-top-color: var(--color-royal);
+          box-shadow: 0 1.67vh 2.96vh rgba(24, 49, 126, 0.18);
+      }
+
+      .step-card[data-step-locked="true"] {
+          opacity: 0.45;
+          cursor: not-allowed;
+      }
+
+      .step-card[data-step-locked="true"]:hover {
+          transform: none;
+          box-shadow: 0 0.93vh 2.31vh rgba(24, 49, 126, 0.12);
       }
 
         section {
@@ -386,17 +402,182 @@
 
         <script>
           (function () {
-            const toggle = document.getElementById("toggle-ediny-den");
-            const targetSection1 = document.getElementById("ediny-den-oformleniya");
-            const targetSection2 = document.getElementById("poluchenie-propuska-i-zarplatnoy-karty");
-            if (!toggle || !targetSection1 || !targetSection2) {
+            const stepCards = Array.from(
+              document.querySelectorAll(".step-card[href^='#']")
+            );
+            const sections = Array.from(document.querySelectorAll("main section[id]"));
+            if (!stepCards.length || !sections.length) {
               return;
             }
 
-            const updateVisibility = () => {
-              targetSection1.hidden = !toggle.checked;
-              targetSection2.hidden = targetSection1.hidden;
+            const sectionMap = new Map();
+            const sectionIdToCard = new Map();
+            const cardToSectionId = new Map();
+            const prefersReducedMotion = window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+            sections.forEach((section) => {
+              if (!section.id) {
+                return;
+              }
+              sectionMap.set(section.id, section);
+              if (!section.dataset.stepLocked) {
+                section.dataset.stepLocked = "false";
+              }
+            });
+
+            stepCards.forEach((card) => {
+              const href = card.getAttribute("href") || "";
+              if (!href.startsWith("#")) {
+                return;
+              }
+              const targetId = href.slice(1);
+              if (!sectionMap.has(targetId)) {
+                return;
+              }
+              cardToSectionId.set(card, targetId);
+              sectionIdToCard.set(targetId, card);
+              card.setAttribute("aria-controls", targetId);
+              card.setAttribute("aria-expanded", "false");
+              card.dataset.stepLocked = "false";
+            });
+
+            sectionIdToCard.forEach((_card, sectionId) => {
+              const section = sectionMap.get(sectionId);
+              if (section) {
+                section.hidden = true;
+              }
+            });
+
+            let activeSectionId = null;
+
+            const hideSectionById = (id) => {
+              const section = sectionMap.get(id);
+              if (!section) {
+                return;
+              }
+              section.hidden = true;
+              section.removeAttribute("data-step-active");
+              const card = sectionIdToCard.get(id);
+              if (card) {
+                card.setAttribute("aria-expanded", "false");
+              }
+              if (activeSectionId === id) {
+                activeSectionId = null;
+              }
             };
+
+            const openSectionById = (id) => {
+              const section = sectionMap.get(id);
+              if (!section || section.dataset.stepLocked === "true") {
+                return false;
+              }
+              if (activeSectionId && activeSectionId !== id) {
+                hideSectionById(activeSectionId);
+              }
+              section.hidden = false;
+              section.setAttribute("data-step-active", "true");
+              const card = sectionIdToCard.get(id);
+              if (card) {
+                card.setAttribute("aria-expanded", "true");
+              }
+              activeSectionId = id;
+              section.scrollIntoView({
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+                block: "start",
+              });
+              const newHash = `#${id}`;
+              if (newHash !== window.location.hash && history.replaceState) {
+                history.replaceState(null, "", newHash);
+              }
+              return true;
+            };
+
+            const lockSectionById = (id, locked, options = {}) => {
+              const section = sectionMap.get(id);
+              if (!section) {
+                return;
+              }
+              const isLocked = Boolean(locked);
+              section.dataset.stepLocked = isLocked ? "true" : "false";
+              const card = sectionIdToCard.get(id);
+              if (card) {
+                card.dataset.stepLocked = section.dataset.stepLocked;
+                if (isLocked) {
+                  card.setAttribute("aria-disabled", "true");
+                  if (options.reason) {
+                    card.setAttribute("title", options.reason);
+                  }
+                } else {
+                  card.removeAttribute("aria-disabled");
+                  if (!options.keepTitle) {
+                    card.removeAttribute("title");
+                  }
+                }
+              }
+              if (isLocked && activeSectionId === id) {
+                hideSectionById(id);
+              }
+            };
+
+            const handleCardClick = (event) => {
+              const card = event.currentTarget;
+              const targetId = cardToSectionId.get(card);
+              if (!targetId) {
+                return;
+              }
+              event.preventDefault();
+              openSectionById(targetId);
+            };
+
+            cardToSectionId.forEach((_sectionId, card) => {
+              card.addEventListener("click", handleCardClick);
+            });
+
+            const handleHashChange = () => {
+              const id = window.location.hash.replace("#", "");
+              if (id) {
+                openSectionById(id);
+              }
+            };
+
+            handleHashChange();
+            window.addEventListener("hashchange", handleHashChange);
+
+            window.stepSectionController = {
+              openSectionById,
+              hideSectionById,
+              lockSectionById,
+              isLocked: (id) => sectionMap.get(id)?.dataset.stepLocked === "true",
+            };
+          })();
+
+          (function () {
+            const controller = window.stepSectionController;
+            const toggle = document.getElementById("toggle-ediny-den");
+            if (!controller || !toggle) {
+              return;
+            }
+
+            const gatedSections = [
+              "ediny-den-oformleniya",
+              "poluchenie-propuska-i-zarplatnoy-karty",
+            ];
+            const lockReason = "Доступно после прохождения онлайн инструктажей";
+
+            const updateVisibility = () => {
+              const shouldLock = !toggle.checked;
+              gatedSections.forEach((sectionId) => {
+                controller.lockSectionById(sectionId, shouldLock, {
+                  reason: lockReason,
+                });
+                if (shouldLock) {
+                  controller.hideSectionById(sectionId);
+                }
+              });
+            };
+
             toggle.addEventListener("change", updateVisibility);
             updateVisibility();
           })();
