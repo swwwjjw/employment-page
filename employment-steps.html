@@ -284,14 +284,14 @@
         }
 
         .section-toggle-action[aria-pressed="true"] {
-        background-color: #ffffff;
+        background-color: rgba(41, 77, 165, 0.08);
           color: var(--color-royal);
           border: 0.09vh solid var(--color-border);
         }
 
         .section-toggle-action[aria-pressed="true"]:hover,
         .section-toggle-action[aria-pressed="true"]:focus-visible {
-        background-color: #ffffff;
+        background-color: rgba(41, 77, 165, 0.08);
           color: var(--color-royal);
         }
 
@@ -449,19 +449,17 @@
             <li>Сразу после просмотра каждого инструктажа будет доступен <b>тест</b>, который можно проходить несколько раз;</li>
           </ul>
           <p class="attention">Примерное время прохождения - 1.5 часа</p>
-          <div class="section-toggle">
-            <button
-              class="ref-button section-toggle-action"
-              type="button"
-              data-section-progress-btn
-              data-default-label="Я прошел онлайн инструктажи"
-              data-completed-label="Инструктажи подтверждены"
-              aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
-              aria-pressed="false"
-            >
-              Я прошел онлайн инструктажи
-            </button>
-          </div>
+          <button
+            class="ref-button section-toggle-action"
+            type="button"
+            data-section-progress-btn
+            data-default-label="Я прошел онлайн инструктажи"
+            data-completed-label="Инструктажи подтверждены"
+            aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
+            aria-pressed="false"
+          >
+            Я прошел онлайн инструктажи
+          </button>
         </div>
       </section>
 
