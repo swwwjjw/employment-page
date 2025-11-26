@@ -99,7 +99,7 @@
         color: #ffffff;
       }
 
-        .ref-button {
+      .ref-button {
           display: inline-flex;
           align-items: center;
           gap: 0.42vw;
@@ -110,7 +110,9 @@
         color: #ffffff;
         text-decoration: none;
           border-radius: 1.25vw;
+        border: none;
         font-weight: 600;
+        cursor: pointer;
         transition: background-color 0.2s ease-in-out;
       }
 
@@ -277,11 +279,21 @@
         color: var(--color-royal);
       }
 
-        .section-toggle input[type="checkbox"] {
-          width: 1.67vh;
-          height: 1.67vh;
-        accent-color: var(--color-royal);
-      }
+        .section-toggle-action {
+          border: none;
+        }
+
+        .section-toggle-action[aria-pressed="true"] {
+        background-color: #ffffff;
+          color: var(--color-royal);
+          border: 0.09vh solid var(--color-border);
+        }
+
+        .section-toggle-action[aria-pressed="true"]:hover,
+        .section-toggle-action[aria-pressed="true"]:focus-visible {
+        background-color: #ffffff;
+          color: var(--color-royal);
+        }
 
     </style>
   </head>
@@ -438,8 +450,17 @@
           </ul>
           <p class="attention">Примерное время прохождения - 1.5 часа</p>
           <div class="section-toggle">
-            <input type="checkbox" id="toggle-ediny-den" aria-controls="ediny-den-oformleniya" />
-            <label for="toggle-ediny-den">Я прошел онлайн инструктажи</label>
+            <button
+              class="ref-button section-toggle-action"
+              type="button"
+              data-section-progress-btn
+              data-default-label="Я прошел онлайн инструктажи"
+              data-completed-label="Инструктажи подтверждены"
+              aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
+              aria-pressed="false"
+            >
+              Я прошел онлайн инструктажи
+            </button>
           </div>
         </div>
       </section>
@@ -540,19 +561,37 @@
           })();
 
           (function () {
-            const toggle = document.getElementById("toggle-ediny-den");
-            const targetSection1 = document.getElementById("ediny-den-oformleniya");
-            const targetSection2 = document.getElementById("poluchenie-propuska-i-zarplatnoy-karty");
-            if (!toggle || !targetSection1 || !targetSection2) {
+            const progressButton = document.querySelector("[data-section-progress-btn]");
+            const targetSections = [
+              document.getElementById("ediny-den-oformleniya"),
+              document.getElementById("poluchenie-propuska-i-zarplatnoy-karty"),
+            ].filter(Boolean);
+
+            if (!progressButton || !targetSections.length) {
               return;
             }
 
-            const updateVisibility = () => {
-              targetSection1.hidden = !toggle.checked;
-              targetSection2.hidden = targetSection1.hidden;
+            const defaultLabel =
+              progressButton.getAttribute("data-default-label")?.trim() ||
+              progressButton.textContent.trim();
+            const completedLabel =
+              progressButton.getAttribute("data-completed-label")?.trim() ||
+              defaultLabel;
+
+            const setState = (isCompleted) => {
+              progressButton.setAttribute("aria-pressed", String(isCompleted));
+              progressButton.textContent = isCompleted ? completedLabel : defaultLabel;
+              targetSections.forEach((section) => {
+                section.hidden = !isCompleted;
+              });
             };
-            toggle.addEventListener("change", updateVisibility);
-            updateVisibility();
+
+            progressButton.addEventListener("click", () => {
+              const isPressed = progressButton.getAttribute("aria-pressed") === "true";
+              setState(!isPressed);
+            });
+
+            setState(false);
           })();
 
             (function () {
