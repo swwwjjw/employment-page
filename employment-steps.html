@@ -24,7 +24,6 @@
       :root {
         --color-navy: #18317e;
         --color-royal: #294da5;
-        --color-amber: #ea9d44;
         --color-background: #f5f7ff;
         --color-surface: #ffffff;
         --color-border: rgba(24, 49, 126, 0.18);
@@ -87,7 +86,7 @@
           align-items: center;
           gap: 0.42vw;
           padding: 1.3vh 1.4vw;
-        background-color: var(--color-amber);
+        background-color: #ffffff;
         color: var(--color-navy);
         text-decoration: none;
           border-radius: 1.25vw;
@@ -96,7 +95,7 @@
       }
 
       .telegram-button:hover {
-        background-color: var(--color-royal);
+        background-color: var(--color-navy);
         color: #ffffff;
       }
 
@@ -107,8 +106,8 @@
           padding: 0.45vh 0.85vw;
           margin-top: 0.56vh;
           margin-bottom: 0vh;
-        background-color: var(--color-amber);
-        color: var(--color-navy);
+        background-color: var(--color-royal);
+        color: #ffffff;
         text-decoration: none;
           border-radius: 1.25vw;
         font-weight: 600;
@@ -116,8 +115,10 @@
       }
 
       .ref-button:hover {
-        background-color: var(--color-royal);
-        color: #ffffff;
+        background-color: rgba(41, 77, 165, 0.08);
+        color: var(--color-royal);
+        border: 0.09vh solid var(--color-border);
+        border-radius: 2vw;
       }
 
         .list {
@@ -129,7 +130,7 @@
         .attention {
           margin-top: 0vh;
           margin-bottom: 0vh;
-        color: var(--color-amber);
+        color: var(--color-royal);
         font-weight: bold;
       }
 
@@ -175,7 +176,7 @@
 
         .department-selector label {
           font-weight: 600;
-          color: var(--color-navy);
+          color: var(--color-royal);
         }
 
         .department-selector select {
@@ -185,12 +186,12 @@
           border: 0.09vh solid var(--color-border);
           border-radius: 0.42vw;
         background-color: rgba(41, 77, 165, 0.05);
-          color: var(--color-navy);
+          color: var(--color-royal);
           font-size: 1rem;
         }
 
         .department-selector select:focus-visible {
-          outline: 0.19vh solid var(--color-amber);
+          outline: 0.19vh solid var(--color-royal);
           outline-offset: 0.19vh;
         }
 
@@ -205,13 +206,13 @@
         .section-context {
           margin: 0;
           padding: 0.93vh 1.1vw;
-          border-left: 0.35vw solid var(--color-amber);
-          background-color: rgba(234, 157, 68, 0.08);
+          border-left: 0.35vw solid var(--color-royal);
+          background-color: rgba(41, 77, 165, 0.08);
           font-weight: 600;
         }
 
         .section-context span {
-          color: var(--color-amber);
+          color: var(--color-royal);
         }
 
         section {
@@ -240,7 +241,7 @@
           border: 0.09vh solid var(--color-border);
           border-radius: 2vw;
         background-color: rgba(41, 77, 165, 0.08);
-          color: var(--color-navy);
+          color: var(--color-royal);
           font-weight: 600;
           cursor: pointer;
           transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -248,8 +249,8 @@
 
         .section-toggle-btn:hover,
         .section-toggle-btn:focus-visible {
-        background-color: var(--color-amber);
-          color: var(--color-navy);
+        background-color: var(--color-royal);
+          color: #ffffff;
           outline: none;
         }
 
@@ -273,13 +274,13 @@
           border-radius: 0.42vw;
         background-color: rgba(41, 77, 165, 0.05);
         font-weight: 600;
-        color: var(--color-navy);
+        color: var(--color-royal);
       }
 
         .section-toggle input[type="checkbox"] {
           width: 1.67vh;
           height: 1.67vh;
-        accent-color: var(--color-amber);
+        accent-color: var(--color-royal);
       }
 
     </style>
@@ -470,7 +471,7 @@
 
       <section id="poluchenie-propuska-i-zarplatnoy-karty" hidden>
         <div class="section-header">
-          <h2>06. Получение пропуска и зарплатной карты</h2>
+          <h2>06. Единый день оформления</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -489,16 +490,7 @@
           data-section-body
           hidden
         >
-          <p class="attention">График работы отдела пропусков:</p>
-          <p class="list-header">Выдача пропусков</p>
-          <ul class="list">
-            <li>Пн-Пт: 8:00-12:00, 17:00-19:45</li>
-            <li>Сб-Вс: 8:00-13:00, 14:00-19:45</li>
-          </ul>
-          <p class="list-header">Фотографирование</p>
-          <ul class="list">
-            <li>Пн-Пт: 9:00-11:00</li>
-          </ul>
+
         </div>
       </section>
     </main>
