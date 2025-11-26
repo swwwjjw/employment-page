@@ -8,4 +8,4 @@ Static onboarding page for the Pulkovo HR team.
 docker compose up --build
 ```
 
-Visit `http://localhost:8080` to verify the page. For deployment guidance see `docs/DOCKER_TRANSFER_PLAN.md`.
+Visit `http://localhost:7000` when testing locally, or `http://188.127.224.145:7000` once deployed to the target server. For deployment guidance see `docs/DOCKER_TRANSFER_PLAN.md`.
