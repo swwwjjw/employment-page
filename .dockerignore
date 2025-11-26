@@ -1,0 +1,15 @@
+# Ignore VCS metadata and local clutter
+.git
+.gitignore
+.DS_Store
+
+# Documentation files are not needed in the runtime image
+*.md
+docs/
+
+# Local tooling artefacts (future-proofing)
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+tmp/
