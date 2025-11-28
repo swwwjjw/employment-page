@@ -269,17 +269,23 @@
           display: flex;
           align-items: center;
           gap: 1vw;
+          position: relative;
         }
 
         .section-toggle-btn {
-          margin-left: auto;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translate(calc(100% + 1vw), -50%);
+          margin-left: 0;
           padding: 0.8vh 1.2vw;
           border: 0.09vh solid var(--color-border);
           border-radius: 2vw;
-        background-color: rgba(41, 77, 165, 0.08);
+          background-color: rgba(41, 77, 165, 0.08);
           color: var(--color-royal);
           font-weight: 600;
           cursor: pointer;
+          white-space: nowrap;
           transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
         }
 
