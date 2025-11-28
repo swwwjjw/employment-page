@@ -79,7 +79,7 @@
           align-items: center;
           gap: 0.42vw;
           padding: 1.3vh 1.4vw;
-        background-color: #ffffff;
+        background-color: #f0f3ff;
         color: var(--color-navy);
         text-decoration: none;
           border-radius: 1.25vw;
@@ -110,9 +110,17 @@
         transition: background-color 0.2s ease-in-out;
       }
 
+      .briefing-button:hover {
+        background-color: rgba(41, 77, 165, 0.08);
+        color: var(--color-royal);
+        border: 0.09vh solid var(--color-border);
+        border-radius: 2vw;
+      }
+
       .ref-button {
-          display: inline-flex;
+          display: flex;
           align-items: center;
+          justify-content: center;
           gap: 0.42vw;
           padding: 0.45vh 0.85vw;
           margin-top: 0.56vh;
@@ -984,7 +992,7 @@
                     template: `
                       <p class="list-header">На данном этапе необходимо:</p>
                       <ul class="list">
-                        <li>Пройти предварительный медицинский осмотр (для сотрудников терминала и перрона);</li>
+                        <li>Пройти предварительный медицинский осмотр;</li>
                         <li>Получить заключение флюорографии (можно сделать в процессе медосмотра).</li>
                       </ul>
                       <p class="list-header">Где пройти осмотры и получить справки?</p>
