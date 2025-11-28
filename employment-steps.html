@@ -236,7 +236,7 @@
           color: var(--color-royal);
         }
 
-        .section-item {
+        section {
           margin-bottom: 5.19vh;
           padding: 2.7vh 2.2vw;
         background-color: var(--color-surface);
@@ -247,7 +247,7 @@
         overflow: visible;
       }
 
-      .section-item::before {
+      section::before {
         content: "";
         position: absolute;
         inset: -1.2vh -0.8vw;
@@ -259,25 +259,16 @@
         z-index: -1;
       }
 
-        .section-header h2 {
+        section h2 {
           margin: 0;
         font-size: 1.75rem;
         color: var(--color-royal);
       }
 
-        .section-item section {
-          margin: 0;
-          padding: 0;
-          background: transparent;
-          border: none;
-          box-shadow: none;
-        }
-
         .section-header {
           display: flex;
           align-items: center;
           gap: 1vw;
-          margin-bottom: 1.3vh;
         }
 
         .section-toggle-btn {
@@ -381,13 +372,13 @@
           color: #ffffff;
         }
 
-        .section-item--completed::before {
+        .section--completed::before {
           background-color: var(--color-success-bg);
           opacity: 1;
           box-shadow: 0 1.11vh 2.4vh rgba(28, 140, 79, 0.3);
         }
 
-        .section-item--completed .section-header h2 {
+        .section--completed h2 {
           color: var(--color-success);
         }
 
@@ -419,12 +410,10 @@
           </select>
         </div>
 
-      <div
-        class="section-item section-item--completed"
-        data-section-item="podpisanie-zayavleniya"
-      >
+      <section id="podpisanie-zayavleniya"
+      class="section--completed">
         <div class="section-header">
-          <h2 id="section-title-podpisanie-zayavleniya">01. Подписание заявления</h2>
+          <h2>01. Подписание заявления</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -437,34 +426,28 @@
             Показать
           </button>
         </div>
-        <section
-          id="podpisanie-zayavleniya"
-          class="section--completed"
-          aria-labelledby="section-title-podpisanie-zayavleniya"
+        <div
+          class="section-body"
+          id="section-body-podpisanie-zayavleniya"
+          data-section-body
+          hidden
         >
-          <div
-            class="section-body"
-            id="section-body-podpisanie-zayavleniya"
-            data-section-body
-            hidden
-          >
-            <p class="list-header">На данном этапе необходимо:</p>
-            <ul class="list">
-              <li>Получить направление на предварительный медицинский осмотр;</li>
-              <li>Получить направление на обязательное психиатрическое освидетельствование;</li>
-              <li>Проконсультироваться в военно-учетном столе (каб. 419);</li>
-              <li>Пройти опрос (по кнопке снизу) для получения средств индивидуальной защиты.</li>
-            </ul>
-            <a class="ref-button" href="https://forms.yandex.ru/cloud/67c59503e010db2c4b186f6c/" target="_blank" rel="noopener noreferrer">
-            Опрос для получения СИЗов
-            </a>
-          </div>
-        </section>
-      </div>
+          <p class="list-header">На данном этапе необходимо:</p>
+          <ul class="list">
+            <li>Получить направление на предварительный медицинский осмотр;</li>
+            <li>Получить направление на обязательное психиатрическое освидетельствование;</li>
+            <li>Проконсультироваться в военно-учетном столе (каб. 419);</li>
+            <li>Пройти опрос (по кнопке снизу) для получения средств индивидуальной защиты.</li>
+          </ul>
+          <a class="ref-button" href="https://forms.yandex.ru/cloud/67c59503e010db2c4b186f6c/" target="_blank" rel="noopener noreferrer">
+          Опрос для получения СИЗов
+          </a>
+        </div>
+      </section>
 
-      <div class="section-item" data-section-item="poluchenie-spravok-iz-gos-organov">
+      <section id="poluchenie-spravok-iz-gos-organov">
         <div class="section-header">
-          <h2 id="section-title-poluchenie-spravok-iz-gos-organov">02. Получение справок из гос. органов</h2>
+          <h2>02. Получение справок из гос. органов</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -477,24 +460,19 @@
             Показать
           </button>
         </div>
-        <section
-          id="poluchenie-spravok-iz-gos-organov"
-          aria-labelledby="section-title-poluchenie-spravok-iz-gos-organov"
+        <div
+          class="section-body"
+          id="section-body-poluchenie-spravok-iz-gos-organov"
+          data-section-body
+          hidden
         >
-          <div
-            class="section-body"
-            id="section-body-poluchenie-spravok-iz-gos-organov"
-            data-section-body
-            hidden
-          >
-            <div class="section-content" data-section-content="poluchenie-spravok-iz-gos-organov"></div>
-          </div>
-        </section>
-      </div>
+          <div class="section-content" data-section-content="poluchenie-spravok-iz-gos-organov"></div>
+        </div>
+      </section>
 
-      <div class="section-item" data-section-item="prohozhdenie-medosmotr">
+      <section id="prohozhdenie-medosmotr">
         <div class="section-header">
-          <h2 id="section-title-prohozhdenie-medosmotr">03. Прохождение медосмотров</h2>
+          <h2>03. Прохождение медосмотров</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -507,24 +485,19 @@
             Показать
           </button>
         </div>
-        <section
-          id="prohozhdenie-medosmotr"
-          aria-labelledby="section-title-prohozhdenie-medosmotr"
+        <div
+          class="section-body"
+          id="section-body-prohozhdenie-medosmotr"
+          data-section-body
+          hidden
         >
-          <div
-            class="section-body"
-            id="section-body-prohozhdenie-medosmotr"
-            data-section-body
-            hidden
-          >
-            <div class="section-content" data-section-content="prohozhdenie-medosmotr"></div>
-          </div>
-        </section>
-      </div>
+          <div class="section-content" data-section-content="prohozhdenie-medosmotr"></div>
+        </div>
+      </section>
 
-      <div class="section-item" data-section-item="prohozhdenie-onlayn-instruktazh">
+      <section id="prohozhdenie-onlayn-instruktazh">
         <div class="section-header">
-          <h2 id="section-title-prohozhdenie-onlayn-instruktazh">04. Прохождение онлайн инструктажей</h2>
+          <h2>04. Прохождение онлайн инструктажей</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -537,53 +510,48 @@
             Показать
           </button>
         </div>
-        <section
-          id="prohozhdenie-onlayn-instruktazh"
-          aria-labelledby="section-title-prohozhdenie-onlayn-instruktazh"
+        <div
+          class="section-body"
+          id="section-body-prohozhdenie-onlayn-instruktazh"
+          data-section-body
+          hidden
         >
-          <div
-            class="section-body"
-            id="section-body-prohozhdenie-onlayn-instruktazh"
-            data-section-body
-            hidden
-          >
-            <p class="list-header">На данном этапе необходимо пройти следующие инструктажи:</p>
-            <a class="briefing-button" href="https://j0tix01.github.io/aviation-transport-security-briefing/" target="_blank" rel="noopener noreferrer">
-            Транспортная безопасность
-            </a>
-            <a class="briefing-button" href="https://j0tix01.github.io/fire-safety-briefing/" target="_blank" rel="noopener noreferrer">
-            Пожарная безопасность
-            </a>
-            <a class="briefing-button" href="https://j0tix01.github.io/civil-defense-briefing/" target="_blank" rel="noopener noreferrer">
-            Гражданская оборона
-            </a>
-            <a class="briefing-button" href="https://j0tix01.github.io/flight-safety-briefing/" target="_blank" rel="noopener noreferrer">
-            Авиационная безопасность
-            </a>
-            <p class="list-header">Правила прохождения:</p>
-            <ul class="list">
-              <li>Навигация осуществляется по кнопкам <b>под видео</b>;</li>
-              <li>Перематывать можно <b>только вперед</b>;</li>
-              <li>Сразу после просмотра каждого инструктажа будет доступен <b>тест</b>, который можно проходить несколько раз.</li>
-            </ul>
-            <p class="attention">Примерное время прохождения - 1.5 часа</p>
-            <a
-              class="ref-button"
-              data-section-progress-btn
-              data-default-label="Я прошел онлайн-инструктажи"
-              data-completed-label="Инструктажи подтверждены"
-              aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
-              aria-pressed="false"
-            >
-              Я прошел онлайн-инструктажи
+          <p class="list-header">На данном этапе необходимо пройти следующие инструктажи:</p>
+          <a class="briefing-button" href="https://j0tix01.github.io/aviation-transport-security-briefing/" target="_blank" rel="noopener noreferrer">
+          Транспортная безопасность
           </a>
-          </div>
-        </section>
-      </div>
+          <a class="briefing-button" href="https://j0tix01.github.io/fire-safety-briefing/" target="_blank" rel="noopener noreferrer">
+          Пожарная безопасность
+          </a>
+          <a class="briefing-button" href="https://j0tix01.github.io/civil-defense-briefing/" target="_blank" rel="noopener noreferrer">
+          Гражданская оборона
+          </a>
+          <a class="briefing-button" href="https://j0tix01.github.io/flight-safety-briefing/" target="_blank" rel="noopener noreferrer">
+          Авиационная безопасность
+          </a>
+          <p class="list-header">Правила прохождения:</p>
+          <ul class="list">
+            <li>Навигация осуществляется по кнопкам <b>под видео</b>;</li>
+            <li>Перематывать можно <b>только вперед</b>;</li>
+            <li>Сразу после просмотра каждого инструктажа будет доступен <b>тест</b>, который можно проходить несколько раз.</li>
+          </ul>
+          <p class="attention">Примерное время прохождения - 1.5 часа</p>
+          <a
+            class="ref-button"
+            data-section-progress-btn
+            data-default-label="Я прошел онлайн-инструктажи"
+            data-completed-label="Инструктажи подтверждены"
+            aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
+            aria-pressed="false"
+          >
+            Я прошел онлайн-инструктажи
+        </a>
+        </div>
+      </section>
 
-      <div class="section-item" data-section-item="ediny-den-oformleniya" hidden>
+      <section id="ediny-den-oformleniya" hidden>
         <div class="section-header">
-          <h2 id="section-title-ediny-den-oformleniya">05. Единый день оформления</h2>
+          <h2>05. Единый день оформления</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -596,25 +564,19 @@
             Показать
           </button>
         </div>
-        <section
-          id="ediny-den-oformleniya"
-          aria-labelledby="section-title-ediny-den-oformleniya"
+        <div
+          class="section-body"
+          id="section-body-ediny-den-oformleniya"
+          data-section-body
           hidden
         >
-          <div
-            class="section-body"
-            id="section-body-ediny-den-oformleniya"
-            data-section-body
-            hidden
-          >
-            <div class="section-content" data-section-content="ediny-den-oformleniya"></div>
-          </div>
-        </section>
-      </div>
+          <div class="section-content" data-section-content="ediny-den-oformleniya"></div>
+        </div>
+      </section>
 
-      <div class="section-item" data-section-item="poluchenie-propuska-i-zarplatnoy-karty" hidden>
+      <section id="poluchenie-propuska-i-zarplatnoy-karty" hidden>
         <div class="section-header">
-          <h2 id="section-title-poluchenie-propuska-i-zarplatnoy-karty">06. Единый день оформления</h2>
+          <h2>06. Единый день оформления</h2>
           <button
             class="section-toggle-btn"
             type="button"
@@ -627,42 +589,36 @@
             Показать
           </button>
         </div>
-        <section
-          id="poluchenie-propuska-i-zarplatnoy-karty"
-          aria-labelledby="section-title-poluchenie-propuska-i-zarplatnoy-karty"
+        <div
+          class="section-body"
+          id="section-body-poluchenie-propuska-i-zarplatnoy-karty"
+          data-section-body
           hidden
         >
-          <div
-            class="section-body"
-            id="section-body-poluchenie-propuska-i-zarplatnoy-karty"
-            data-section-body
-            hidden
-          >
-            <p class="list-header">410 кабинет:</p>
-            <ul class="list">
-              <li>08:30 - сбор и проверка документов;</li>
-              <li>09:00 - очный инструктаж по охране труда;</li>
-            </ul>
-            <p class="list-header">409 кабинет "Охрана труда":</p>
-            <ul class="list">
-              <li>11:00 - проверка флюрографии и подпись в журнале за инструктаж по охране труда;</li>
-            </ul>
-            <p class="list-header">423 кабинет "Отдел сопровождения трудовых отношений":</p>
-            <ul class="list">
-              <li>11:30-16:30 - подписание трудового договора;</li>
-            </ul>
-            <p class="list-header">202 (1 окно) "Отдел пропусков":</p>
-            <ul class="list">
-              <li>14:00-14:30 - фото на пропуск;</li>
-            </ul>
-            <p class="list-header">408 кабинет "Расчетная группа":</p>
-            <ul class="list">
-              <li>После подписания трудового договора - заявление на выпуск зарплатной карты ВТБ;</li>
-              <li>После подписания трудового договора - заявление на служебную парковку по корпоративным тарифам.</li>
-            </ul>
-          </div>
-        </section>
-      </div>
+          <p class="list-header">410 кабинет:</p>
+          <ul class="list">
+            <li>08:30 - сбор и проверка документов;</li>
+            <li>09:00 - очный инструктаж по охране труда;</li>
+          </ul>
+          <p class="list-header">409 кабинет "Охрана труда":</p>
+          <ul class="list">
+            <li>11:00 - проверка флюрографии и подпись в журнале за инструктаж по охране труда;</li>
+          </ul>
+          <p class="list-header">423 кабинет "Отдел сопровождения трудовых отношений":</p>
+          <ul class="list">
+            <li>11:30-16:30 - подписание трудового договора;</li>
+          </ul>
+          <p class="list-header">202 (1 окно) "Отдел пропусков":</p>
+          <ul class="list">
+            <li>14:00-14:30 - фото на пропуск;</li>
+          </ul>
+          <p class="list-header">408 кабинет "Расчетная группа":</p>
+          <ul class="list">
+            <li>После подписания трудового договора - заявление на выпуск зарплатной карты ВТБ;</li>
+            <li>После подписания трудового договора - заявление на служебную парковку по корпоративным тарифам.</li>
+          </ul>
+        </div>
+      </section>
     </main>
 
         <script>
@@ -672,10 +628,8 @@
 
             sectionBodies.forEach((body) => {
               const section = body.closest("section");
-              const wrapper = section?.closest("[data-section-item]");
-              const toggle = wrapper?.querySelector("[data-section-toggle-btn]");
-
-              if (!toggle || !section) {
+              const toggle = section?.querySelector("[data-section-toggle-btn]");
+              if (!toggle) {
                 return;
               }
 
@@ -696,7 +650,6 @@
                 toggle.setAttribute("aria-expanded", String(isExpanded));
                 toggle.textContent = isExpanded ? expandedLabel : collapsedLabel;
                 if (isExpanded) {
-                  section.removeAttribute("hidden");
                   body.removeAttribute("hidden");
                 } else {
                   body.setAttribute("hidden", "");
@@ -723,9 +676,6 @@
               return;
             }
 
-            const getSectionWrapper = (node) =>
-              node?.closest("[data-section-item]") || null;
-
             const defaultLabel =
               progressButton.getAttribute("data-default-label")?.trim() ||
               progressButton.textContent.trim();
@@ -738,10 +688,6 @@
               progressButton.textContent = isCompleted ? completedLabel : defaultLabel;
               targetSections.forEach((section) => {
                 section.hidden = !isCompleted;
-                const wrapper = getSectionWrapper(section);
-                if (wrapper) {
-                  wrapper.hidden = !isCompleted;
-                }
               });
             };
 
@@ -1538,7 +1484,6 @@
             };
 
             sections.forEach((section) => {
-              const wrapper = section.closest("[data-section-item]");
               const button = ensureButton(section);
               const defaultLabel =
                 button.getAttribute("data-default-label")?.trim() || DEFAULT_LABEL;
@@ -1548,9 +1493,6 @@
 
               const setState = (isCompleted) => {
                 section.classList.toggle("section--completed", isCompleted);
-                if (wrapper) {
-                  wrapper.classList.toggle("section-item--completed", isCompleted);
-                }
                 button.setAttribute("aria-pressed", String(isCompleted));
                 button.textContent = isCompleted ? completedLabel : defaultLabel;
               };
@@ -1560,10 +1502,7 @@
                 setState(!isCompleted);
               });
 
-              setState(
-                section.classList.contains("section--completed") ||
-                  wrapper?.classList.contains("section-item--completed")
-              );
+              setState(section.classList.contains("section--completed"));
             });
           })();
         </script>
