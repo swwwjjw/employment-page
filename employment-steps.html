@@ -21,6 +21,12 @@
         --color-muted: rgba(24, 49, 126, 0.7);
         --color-success: #1c8c4f;
         --color-success-bg: #e8f9ed;
+        --space-xs: clamp(0.5rem, 1.5vw, 0.75rem);
+        --space-sm: clamp(0.75rem, 2vw, 1.25rem);
+        --space-md: clamp(1rem, 3vw, 1.75rem);
+        --space-lg: clamp(1.5rem, 4vw, 2.5rem);
+        --radius-card: 1rem;
+        --radius-pill: 999px;
       }
 
       * {
@@ -32,18 +38,35 @@
         font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
         color: var(--color-navy);
         background-color: var(--color-background);
-        line-height: 1.6;
+        line-height: 1.7;
+        font-size: clamp(0.95rem, 2.5vw, 1rem);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      select {
+        font: inherit;
       }
 
       .toolbar {
         --toolbar-opacity: 1;
         --toolbar-fade-distance: 280;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        padding: 1.8vh 1.7vw;
+        gap: var(--space-xs);
+        padding: var(--space-sm) var(--space-md);
         background: linear-gradient(135deg, var(--color-navy), var(--color-royal));
-        border-bottom: 0.09vh solid rgba(234, 157, 68, 0.35);
+        border-bottom: 1px solid rgba(234, 157, 68, 0.35);
         position: sticky;
         top: 0;
         z-index: 10;
@@ -57,23 +80,25 @@
       }
 
       .toolbar img {
-        width: 14vw;
-        max-height: 6.76vh;
-        height: auto;
+        width: clamp(150px, 45vw, 240px);
       }
 
       .telegram-button {
         display: inline-flex;
         align-items: center;
-        gap: 0.42vw;
-        padding: 1.3vh 1.4vw;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.85rem 1.25rem;
         background-color: #f0f3ff;
         color: var(--color-navy);
         text-decoration: none;
-        border-radius: 1.25vw;
+        border-radius: var(--radius-pill);
         font-weight: 600;
         font-style: italic;
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        text-align: center;
       }
 
       .telegram-button:hover {
@@ -85,26 +110,28 @@
       .ref-button {
         display: inline-flex;
         align-items: center;
-        gap: 0.42vw;
-        padding: 0.45vh 0.85vw;
-        margin-top: 0.56vh;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.65rem 1.1rem;
+        margin-top: 0.65rem;
         background-color: var(--color-royal);
         color: #ffffff;
         text-decoration: none;
-        border-radius: 1.25vw;
+        border-radius: var(--radius-pill);
         border: none;
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
           border-color 0.2s ease-in-out;
+        text-align: center;
       }
 
       .briefing-button:hover,
       .ref-button:hover {
         background-color: rgba(41, 77, 165, 0.08);
         color: var(--color-royal);
-        border: 0.09vh solid var(--color-border);
-        border-radius: 2vw;
+        border: 1px solid var(--color-border);
       }
 
       .list,
@@ -116,7 +143,7 @@
 
       .list {
         color: var(--color-muted);
-        padding-left: 1.15rem;
+        padding-left: 1.25rem;
       }
 
       .attention,
@@ -125,29 +152,29 @@
       }
 
       main {
-        width: min(960px, 90vw);
+        width: min(100%, 960px);
         margin: 0 auto;
-        padding: 4vh 2vw 7vh;
+        padding: var(--space-lg) var(--space-sm) calc(var(--space-lg) * 1.8);
       }
 
       h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
         text-transform: uppercase;
-        letter-spacing: 0.1vw;
-        margin: 2.22vh 0 3.7vh;
+        letter-spacing: clamp(0.2rem, 0.6vw, 0.4rem);
+        margin: var(--space-md) 0 var(--space-lg);
         text-align: center;
       }
 
       .department-selector {
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.84vw;
-        margin-bottom: 5.19vh;
-        padding: 1.67vh 1.4vw;
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-xs);
+        margin-bottom: var(--space-lg);
+        padding: var(--space-sm);
         background-color: var(--color-surface);
-        border-radius: 0.63vw;
-        box-shadow: 0 0.74vh 1.85vh rgba(24, 49, 126, 0.08);
+        border-radius: var(--radius-card);
+        box-shadow: 0 0.75rem 1.5rem rgba(24, 49, 126, 0.08);
       }
 
       .department-selector label {
@@ -156,35 +183,35 @@
       }
 
       .department-selector select {
-        flex: 1;
-        min-width: 16vw;
-        padding: 1.1vh 0.9vw;
-        border: 0.09vh solid var(--color-border);
-        border-radius: 0.42vw;
+        width: 100%;
+        padding: 0.85rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
         background-color: rgba(41, 77, 165, 0.05);
         color: var(--color-royal);
         font-size: 1rem;
       }
 
       .department-selector select:focus-visible {
-        outline: 0.19vh solid var(--color-royal);
-        outline-offset: 0.19vh;
+        outline: 2px solid var(--color-royal);
+        outline-offset: 2px;
       }
 
       .section-content {
-        margin-top: 1.85vh;
+        margin-top: var(--space-sm);
       }
 
       .section-content > * + * {
-        margin-top: 1.11vh;
+        margin-top: var(--space-xs);
       }
 
       .section-context {
         margin: 0;
-        padding: 0.93vh 1.1vw;
-        border-left: 0.35vw solid var(--color-royal);
+        padding: 0.85rem 1rem;
+        border-left: 6px solid var(--color-royal);
         background-color: rgba(41, 77, 165, 0.08);
         font-weight: 600;
+        font-size: 0.95rem;
       }
 
       .section-context span {
@@ -192,11 +219,11 @@
       }
 
       section {
-        margin-bottom: 5.19vh;
-        padding: 2.7vh 2.2vw;
+        margin-bottom: var(--space-lg);
+        padding: var(--space-sm);
         background-color: var(--color-surface);
-        border-radius: 0.63vw;
-        box-shadow: 0 0.74vh 1.85vh rgba(24, 49, 126, 0.08);
+        border-radius: var(--radius-card);
+        box-shadow: 0 0.75rem 1.5rem rgba(24, 49, 126, 0.08);
         position: relative;
         z-index: 0;
         overflow: visible;
@@ -205,8 +232,8 @@
       section::before {
         content: "";
         position: absolute;
-        inset: -1.2vh -0.8vw;
-        border-radius: calc(0.63vw + 0.8vw);
+        inset: -0.5rem;
+        border-radius: calc(var(--radius-card) + 0.5rem);
         background-color: transparent;
         opacity: 0;
         transition: opacity 0.25s ease-in-out;
@@ -216,32 +243,31 @@
 
       section h2 {
         margin: 0;
-        font-size: 1.75rem;
+        font-size: clamp(1.35rem, 6vw, 1.75rem);
         color: var(--color-royal);
       }
 
       .section-header {
         display: flex;
-        align-items: center;
-        gap: 1vw;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
         position: relative;
       }
 
       .section-toggle-btn {
-        position: absolute;
-        top: 50%;
-        right: -5%;
-        transform: translate(calc(100% + 1vw), -50%);
+        width: 100%;
         margin-left: 0;
-        padding: 0.8vh 1.2vw;
-        border: 0.09vh solid var(--color-border);
-        border-radius: 2vw;
+        padding: 0.65rem 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
         background-color: rgba(41, 76, 165, 0.041);
         color: var(--color-royal);
         font-weight: 600;
         cursor: pointer;
         white-space: nowrap;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        text-align: center;
       }
 
       .section-toggle-btn:hover,
@@ -259,12 +285,12 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.42vw;
+        gap: 0.4rem;
         width: 100%;
-        margin-top: 2.22vh;
-        padding: 1.3vh 1.1vw;
-        border: 0.09vh solid var(--color-border);
-        border-radius: 2.5vw;
+        margin-top: var(--space-md);
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
         background-color: rgba(41, 77, 165, 0.08);
         color: var(--color-royal);
         font-weight: 600;
@@ -302,6 +328,117 @@
 
       .section--completed h2 {
         color: var(--color-success);
+      }
+
+      @media (min-width: 640px) {
+        .toolbar {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .toolbar img {
+          width: clamp(180px, 22vw, 260px);
+        }
+
+        .telegram-button {
+          width: auto;
+        }
+
+        .briefing-button,
+        .ref-button {
+          width: fit-content;
+        }
+
+        .department-selector {
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        .department-selector label {
+          min-width: 12rem;
+        }
+
+        .department-selector select {
+          flex: 1;
+          min-width: 12rem;
+        }
+
+        .section-header {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .section-toggle-btn {
+          width: auto;
+          align-self: flex-start;
+        }
+      }
+
+      @media (min-width: 900px) {
+        body {
+          font-size: 1rem;
+        }
+
+        main {
+          width: min(960px, 90vw);
+          padding: 4vh 2vw 7vh;
+        }
+
+        section {
+          padding: 2.7vh 2.2vw;
+          border-radius: 0.63vw;
+        }
+
+        .section-context {
+          font-size: 1rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .toolbar {
+          padding: 1.8vh 1.7vw;
+        }
+
+        .toolbar img {
+          width: 14vw;
+          max-height: 6.76vh;
+        }
+
+        .telegram-button {
+          gap: 0.42vw;
+          padding: 1.3vh 1.4vw;
+          border-radius: 1.25vw;
+        }
+
+        .briefing-button,
+        .ref-button {
+          padding: 0.45vh 0.85vw;
+          border-radius: 1.25vw;
+        }
+
+        section h2 {
+          font-size: 1.75rem;
+        }
+
+        .section-header {
+          align-items: center;
+        }
+
+        .section-toggle-btn {
+          position: absolute;
+          top: 50%;
+          right: -5%;
+          transform: translate(calc(100% + 1vw), -50%);
+          padding: 0.8vh 1.2vw;
+          border-radius: 2vw;
+        }
+
+        .section-complete-btn {
+          padding: 1.3vh 1.1vw;
+          border-radius: 2.5vw;
+        }
       }
     </style>
   </head>
