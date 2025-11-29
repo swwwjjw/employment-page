@@ -27,6 +27,9 @@
         --space-lg: clamp(1.5rem, 4vw, 2.5rem);
         --radius-card: 1rem;
         --radius-pill: 999px;
+        --toggle-padding-block: 0.65rem;
+        --toggle-padding-inline: 1rem;
+        --toggle-border-radius: var(--radius-pill);
       }
 
       * {
@@ -113,12 +116,12 @@
         justify-content: center;
         gap: 0.5rem;
         width: 100%;
-        padding: 0.65rem 1.1rem;
+        padding: var(--toggle-padding-block) var(--toggle-padding-inline);
         margin-top: 0.65rem;
         background-color: var(--color-royal);
         color: #ffffff;
         text-decoration: none;
-        border-radius: var(--radius-pill);
+        border-radius: var(--toggle-border-radius);
         border: none;
         font-weight: 600;
         cursor: pointer;
@@ -258,9 +261,9 @@
       .section-toggle-btn {
         width: 100%;
         margin-left: 0;
-        padding: 0.65rem 1rem;
+        padding: var(--toggle-padding-block) var(--toggle-padding-inline);
         border: 1px solid var(--color-border);
-        border-radius: var(--radius-pill);
+        border-radius: var(--toggle-border-radius);
         background-color: rgba(41, 76, 165, 0.041);
         color: var(--color-royal);
         font-weight: 600;
@@ -397,6 +400,12 @@
       }
 
       @media (min-width: 1024px) {
+        :root {
+          --toggle-padding-block: 0.8vh;
+          --toggle-padding-inline: 1.2vw;
+          --toggle-border-radius: 2vw;
+        }
+
         .toolbar {
           padding: 1.8vh 1.7vw;
         }
@@ -409,12 +418,6 @@
         .telegram-button {
           gap: 0.42vw;
           padding: 1.3vh 1.4vw;
-          border-radius: 1.25vw;
-        }
-
-        .briefing-button,
-        .ref-button {
-          padding: 0.45vh 0.85vw;
           border-radius: 1.25vw;
         }
 
@@ -431,8 +434,8 @@
           top: 50%;
           right: -5%;
           transform: translate(calc(100% + 1vw), -50%);
-          padding: 0.8vh 1.2vw;
-          border-radius: 2vw;
+          padding: var(--toggle-padding-block) var(--toggle-padding-inline);
+          border-radius: var(--toggle-border-radius);
         }
 
         .section-complete-btn {
