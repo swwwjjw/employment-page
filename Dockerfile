@@ -14,9 +14,9 @@ COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 # Copy static assets
 COPY employment-steps.html /usr/share/nginx/html/employment-steps.html
 COPY logotip.png /usr/share/nginx/html/logotip.png
-COPY logotip.png /usr/share/nginx/html/flg.png
-COPY logotip.png /usr/share/nginx/html/medosmotr.png
-COPY logotip.png /usr/share/nginx/html/parking.png
+COPY flg.png /usr/share/nginx/html/flg.png
+COPY medosmotr.png /usr/share/nginx/html/medosmotr.png
+COPY parking.png /usr/share/nginx/html/parking.jpg
 COPY Montserrat /usr/share/nginx/html/Montserrat
 
 EXPOSE 80
