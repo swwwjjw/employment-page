@@ -16,7 +16,7 @@ COPY employment-steps.html /usr/share/nginx/html/employment-steps.html
 COPY logotip.png /usr/share/nginx/html/logotip.png
 COPY flg.png /usr/share/nginx/html/flg.png
 COPY medosmotr.png /usr/share/nginx/html/medosmotr.png
-COPY parking.png /usr/share/nginx/html/parking.jpg
+COPY parking.jpg /usr/share/nginx/html/parking.jpg
 COPY Montserrat /usr/share/nginx/html/Montserrat
 
 EXPOSE 80
