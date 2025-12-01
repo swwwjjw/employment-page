@@ -612,16 +612,16 @@
             <li>Минимальный порог прохождения теста - 90%.</li>
           </ul>
           <p class="attention">Примерное время прохождения - 1.5 часа</p>
-          <a
-            class="ref-button"
-            data-section-progress-btn
+          <button
+            class="section-complete-btn"
+            type="button"
+            data-section-complete-btn
             data-default-label="Я прошел онлайн-инструктажи"
             data-completed-label="Инструктажи подтверждены"
             aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
-            aria-pressed="false"
           >
             Я прошел онлайн-инструктажи
-          </a>
+          </button>
         </div>
       </section>
 
@@ -738,39 +738,6 @@
 
           updateState(false);
         });
-      })();
-
-      (function () {
-        const progressButton = document.querySelector("[data-section-progress-btn]");
-        const targetSections = [
-          document.getElementById("ediny-den-oformleniya"),
-          document.getElementById("poluchenie-propuska-i-zarplatnoy-karty"),
-        ].filter(Boolean);
-
-        if (!progressButton || !targetSections.length) {
-          return;
-        }
-
-        const defaultLabel =
-          progressButton.getAttribute("data-default-label")?.trim() ||
-          progressButton.textContent.trim();
-        const completedLabel =
-          progressButton.getAttribute("data-completed-label")?.trim() || defaultLabel;
-
-        const setState = (isCompleted) => {
-          progressButton.setAttribute("aria-pressed", String(isCompleted));
-          progressButton.textContent = isCompleted ? completedLabel : defaultLabel;
-          targetSections.forEach((section) => {
-            section.hidden = !isCompleted;
-          });
-        };
-
-        progressButton.addEventListener("click", () => {
-          const isPressed = progressButton.getAttribute("aria-pressed") === "true";
-          setState(!isPressed);
-        });
-
-        setState(false);
       })();
 
       (function () {
@@ -1737,6 +1704,14 @@
 
         const DEFAULT_LABEL = "Отметить этап выполненным";
         const COMPLETED_LABEL = "Этап выполнен";
+        const PROGRESS_SECTION_ID = "prohozhdenie-onlayn-instruktazh";
+        const PROGRESS_TARGET_IDS = [
+          "ediny-den-oformleniya",
+          "poluchenie-propuska-i-zarplatnoy-karty",
+        ];
+
+        const resolveProgressTargets = () =>
+          PROGRESS_TARGET_IDS.map((id) => document.getElementById(id)).filter(Boolean);
 
         const ensureButton = (section) => {
           let button = section.querySelector("[data-section-complete-btn]");
@@ -1760,10 +1735,25 @@
           const completedLabel =
             button.getAttribute("data-completed-label")?.trim() || COMPLETED_LABEL;
 
+          const progressTargets =
+            section.id === PROGRESS_SECTION_ID ? resolveProgressTargets() : [];
+
+          if (progressTargets.length) {
+            button.setAttribute(
+              "aria-controls",
+              progressTargets.map((target) => target.id).join(" "),
+            );
+          }
+
           const setState = (isCompleted) => {
             section.classList.toggle("section--completed", isCompleted);
             button.setAttribute("aria-pressed", String(isCompleted));
             button.textContent = isCompleted ? completedLabel : defaultLabel;
+            if (progressTargets.length) {
+              progressTargets.forEach((target) => {
+                target.hidden = !isCompleted;
+              });
+            }
           };
 
           button.addEventListener("click", () => {
