@@ -496,23 +496,7 @@
           data-section-body
           hidden
         >
-          <p class="list-header">На данном этапе необходимо:</p>
-          <ul class="list">
-            <li>Получить направление на предварительный медицинский осмотр;</li>
-            <li>Получить направление на обязательное психиатрическое освидетельствование;</li>
-            <li>Проконсультироваться в военно-учетном столе (каб. 419);</li>
-            <li>
-              Пройти опрос (по кнопке снизу) для получения средств индивидуальной защиты.
-            </li>
-          </ul>
-          <a
-            class="ref-button"
-            href="https://forms.yandex.ru/cloud/67c59503e010db2c4b186f6c/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Опрос для получения СИЗов
-          </a>
+          <div class="section-content" data-section-content="podpisanie-zayavleniya"></div>
         </div>
       </section>
 
@@ -808,6 +792,23 @@
           `<p class="section-context">Информация для: <span>${departmentLabel}</span></p>`;
 
         const sectionDefaultBodies = {
+          "podpisanie-zayavleniya": () => `
+            <p class="list-header">На данном этапе необходимо:</p>
+            <ul class="list">
+              <li>Получить направление на предварительный медицинский осмотр;</li>
+              <li>Получить направление на обязательное психиатрическое освидетельствование;</li>
+              <li>Проконсультироваться в военно-учетном столе (каб. 419);</li>
+              <li>Пройти опрос (по кнопке снизу) для получения средств индивидуальной защиты.</li>
+            </ul>
+            <a
+              class="ref-button"
+              href="https://forms.yandex.ru/cloud/67c59503e010db2c4b186f6c/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Опрос для получения СИЗов
+            </a>
+          `,
           "poluchenie-spravok-iz-gos-organov": () => ``,
           "prohozhdenie-medosmotr": () => ``,
           "ediny-den-oformleniya": () => ``,
