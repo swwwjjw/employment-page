@@ -30,6 +30,7 @@
         --toggle-padding-block: 0.65rem;
         --toggle-padding-inline: 1rem;
         --toggle-border-radius: var(--radius-pill);
+        --section-toggle-gap: 1rem;
       }
 
       * {
@@ -403,6 +404,7 @@
           --toggle-padding-block: 0.8vh;
           --toggle-padding-inline: 1.2vw;
           --toggle-border-radius: 2vw;
+          --section-toggle-gap: clamp(0.75rem, 1.8vw, 2.75rem);
         }
 
         .toolbar {
@@ -431,8 +433,8 @@
         .section-toggle-btn {
           position: absolute;
           top: 50%;
-          right: -5%;
-          transform: translate(calc(100% + 1vw), -50%);
+          right: 0;
+          transform: translate(calc(100% + var(--section-toggle-gap)), -50%);
           padding: var(--toggle-padding-block) var(--toggle-padding-inline);
           border-radius: var(--toggle-border-radius);
         }
