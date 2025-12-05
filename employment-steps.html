@@ -30,7 +30,6 @@
         --toggle-padding-block: 0.65rem;
         --toggle-padding-inline: 1rem;
         --toggle-border-radius: var(--radius-pill);
-        --section-toggle-gap: 1rem;
       }
 
       * {
@@ -258,32 +257,6 @@
         position: relative;
       }
 
-      .section-toggle-btn {
-        width: 100%;
-        margin-left: 0;
-        padding: var(--toggle-padding-block) var(--toggle-padding-inline);
-        border: 1px solid var(--color-border);
-        border-radius: var(--toggle-border-radius);
-        background-color: rgba(41, 76, 165, 0.041);
-        color: var(--color-royal);
-        font-weight: 600;
-        cursor: pointer;
-        white-space: nowrap;
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-        text-align: center;
-      }
-
-      .section-toggle-btn:hover,
-      .section-toggle-btn:focus-visible {
-        background-color: var(--color-royal);
-        color: #ffffff;
-        outline: none;
-      }
-
-      .section-body[hidden] {
-        display: none;
-      }
-
       .section-complete-btn {
         display: inline-flex;
         align-items: center;
@@ -371,11 +344,6 @@
           flex-direction: row;
           align-items: center;
         }
-
-        .section-toggle-btn {
-          width: auto;
-          align-self: flex-start;
-        }
       }
 
       @media (min-width: 900px) {
@@ -403,7 +371,6 @@
           --toggle-padding-block: 0.8vh;
           --toggle-padding-inline: 1.2vw;
           --toggle-border-radius: 2vw;
-          --section-toggle-gap: clamp(0.75rem, 5vw, 3.75rem);
         }
 
         .toolbar {
@@ -427,15 +394,6 @@
 
         .section-header {
           align-items: center;
-        }
-
-        .section-toggle-btn {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          transform: translate(calc(100% + var(--section-toggle-gap)), -50%);
-          padding: var(--toggle-padding-block) var(--toggle-padding-inline);
-          border-radius: var(--toggle-border-radius);
         }
 
         .section-complete-btn {
@@ -479,23 +437,10 @@
       <section id="podpisanie-zayavleniya" class="section--completed">
         <div class="section-header">
           <h2>01. Подписание заявления</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-podpisanie-zayavleniya"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-podpisanie-zayavleniya"
-          data-section-body
-          hidden
         >
           <div class="section-content" data-section-content="podpisanie-zayavleniya"></div>
         </div>
@@ -504,23 +449,10 @@
       <section id="poluchenie-spravok-iz-gos-organov">
         <div class="section-header">
           <h2>02. Получение справок из гос. органов</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-poluchenie-spravok-iz-gos-organov"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-poluchenie-spravok-iz-gos-organov"
-          data-section-body
-          hidden
         >
           <div class="section-content" data-section-content="poluchenie-spravok-iz-gos-organov"></div>
         </div>
@@ -529,23 +461,10 @@
       <section id="prohozhdenie-medosmotr">
         <div class="section-header">
           <h2>03. Прохождение медосмотров</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-prohozhdenie-medosmotr"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-prohozhdenie-medosmotr"
-          data-section-body
-          hidden
         >
           <div class="section-content" data-section-content="prohozhdenie-medosmotr"></div>
         </div>
@@ -554,23 +473,10 @@
       <section id="prohozhdenie-onlayn-instruktazh">
         <div class="section-header">
           <h2>04. Прохождение онлайн инструктажей</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-prohozhdenie-onlayn-instruktazh"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-prohozhdenie-onlayn-instruktazh"
-          data-section-body
-          hidden
         >
           <p class="list-header">На данном этапе необходимо пройти следующие инструктажи:</p>
           <a
@@ -629,23 +535,10 @@
       <section id="ediny-den-oformleniya" hidden>
         <div class="section-header">
           <h2>05. Запись на трудоустройство</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-ediny-den-oformleniya"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-ediny-den-oformleniya"
-          data-section-body
-          hidden
         >
           <div class="section-content" data-section-content="ediny-den-oformleniya"></div>
         </div>
@@ -654,23 +547,10 @@
       <section id="poluchenie-propuska-i-zarplatnoy-karty" hidden>
         <div class="section-header">
           <h2>06. Единый день оформления</h2>
-          <button
-            class="section-toggle-btn"
-            type="button"
-            data-section-toggle-btn
-            data-collapsed-label="Показать"
-            data-expanded-label="Скрыть"
-            aria-expanded="false"
-            aria-controls="section-body-poluchenie-propuska-i-zarplatnoy-karty"
-          >
-            Показать
-          </button>
         </div>
         <div
           class="section-body"
           id="section-body-poluchenie-propuska-i-zarplatnoy-karty"
-          data-section-body
-          hidden
         >
           <p class="list-header">410 кабинет:</p>
           <ul class="list">
@@ -700,47 +580,6 @@
     </main>
 
     <script>
-      (function () {
-        let autoId = 0;
-        const sectionBodies = document.querySelectorAll("[data-section-body]");
-
-        sectionBodies.forEach((body) => {
-          const section = body.closest("section");
-          const toggle = section?.querySelector("[data-section-toggle-btn]");
-          if (!toggle) {
-            return;
-          }
-
-          if (!body.id) {
-            autoId += 1;
-            body.id = `section-body-${autoId}`;
-          }
-
-          toggle.setAttribute("aria-controls", body.id);
-          toggle.setAttribute("aria-expanded", "false");
-
-          const collapsedLabel = toggle.getAttribute("data-collapsed-label") || "Показать";
-          const expandedLabel = toggle.getAttribute("data-expanded-label") || "Скрыть";
-
-          const updateState = (isExpanded) => {
-            toggle.setAttribute("aria-expanded", String(isExpanded));
-            toggle.textContent = isExpanded ? expandedLabel : collapsedLabel;
-            if (isExpanded) {
-              body.removeAttribute("hidden");
-            } else {
-              body.setAttribute("hidden", "");
-            }
-          };
-
-          toggle.addEventListener("click", () => {
-            const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-            updateState(!isExpanded);
-          });
-
-          updateState(false);
-        });
-      })();
-
       (function () {
         const select = document.getElementById("department-select");
         const sectionNodes = document.querySelectorAll("[data-section-content]");
