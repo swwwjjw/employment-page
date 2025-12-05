@@ -154,29 +154,6 @@
         color: var(--color-royal);
       }
 
-      .document-frame {
-        margin-top: var(--space-sm);
-        padding: calc(var(--space-sm) * 1.1);
-        border-radius: calc(var(--radius-card) - 0.35rem);
-        border: 1px solid var(--color-border);
-        background: rgba(41, 77, 165, 0.06);
-        box-shadow: inset 0 0 0 1px rgba(41, 77, 165, 0.08);
-      }
-
-      .document-frame .list-header {
-        color: var(--color-navy);
-        font-weight: 700;
-      }
-
-      .document-frame .attention {
-        margin-top: var(--space-xs);
-        font-weight: 600;
-      }
-
-      .document-frame .list {
-        margin-top: var(--space-xs);
-      }
-
       main {
         width: min(100%, 960px);
         margin: 0 auto;
@@ -617,58 +594,6 @@
           }
           return acc;
         }, {});
-
-        const DOCUMENT_FRAME_SECTION_IDS = [
-          "podpisanie-zayavleniya",
-          "ediny-den-oformleniya",
-        ];
-        const DOCUMENT_FRAME_HEADER_TEXT = "Перепроверьте список необходимых документов:";
-
-        const unwrapDocumentFrames = (target) => {
-          target.querySelectorAll("[data-document-frame]").forEach((wrapper) => {
-            const parent = wrapper.parentNode;
-            while (wrapper.firstChild) {
-              parent.insertBefore(wrapper.firstChild, wrapper);
-            }
-            wrapper.remove();
-          });
-        };
-
-        const applyDocumentFrames = () => {
-          DOCUMENT_FRAME_SECTION_IDS.forEach((sectionId) => {
-            const target = sectionTargets[sectionId];
-            if (!target) {
-              return;
-            }
-
-            unwrapDocumentFrames(target);
-
-            const headers = Array.from(target.querySelectorAll("p.list-header")).filter((header) =>
-              header.textContent.trim().startsWith(DOCUMENT_FRAME_HEADER_TEXT),
-            );
-
-            headers.forEach((header) => {
-              if (header.closest("[data-document-frame]")) {
-                return;
-              }
-
-              const frame = document.createElement("div");
-              frame.className = "document-frame";
-              frame.setAttribute("data-document-frame", "");
-
-              let next = header.nextElementSibling;
-              frame.appendChild(header);
-
-              while (next && next.matches(".attention, .list")) {
-                const current = next;
-                next = current.nextElementSibling;
-                frame.appendChild(current);
-              }
-
-              header.parentNode.insertBefore(frame, next || null);
-            });
-          });
-        };
 
         const getContextBlock = (departmentLabel) =>
           `<p class="section-context">Информация для: <span>${departmentLabel}</span></p>`;
@@ -1735,8 +1660,6 @@
 
             target.innerHTML = body ? `${contextBlock}\n${body}` : contextBlock;
           });
-
-          applyDocumentFrames();
         };
 
         select.addEventListener("change", renderSections);
