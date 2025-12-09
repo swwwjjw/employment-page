@@ -18,6 +18,8 @@ COPY flg.png /usr/share/nginx/html/flg.png
 COPY medosmotr.png /usr/share/nginx/html/medosmotr.png
 COPY parking.jpg /usr/share/nginx/html/parking.jpg
 COPY Montserrat /usr/share/nginx/html/Montserrat
+COPY trudovaya_guide.pdf /usr/share/nginx/html/trudovaya_guide.pdf
+COPY judgement_guide.pdf /usr/share/nginx/html/judgement_guide.pdf
 
 EXPOSE 80
 
