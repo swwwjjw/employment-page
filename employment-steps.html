@@ -259,6 +259,45 @@
         position: relative;
       }
 
+      .section-complete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        width: 100%;
+        margin-top: var(--space-md);
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        background-color: rgba(41, 77, 165, 0.08);
+        color: var(--color-royal);
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+          border-color 0.2s ease-in-out;
+      }
+
+      .section-complete-btn:hover,
+      .section-complete-btn:focus-visible {
+        background-color: rgba(28, 140, 79, 0.15);
+        border-color: rgba(28, 140, 79, 0.35);
+        color: var(--color-royal);
+        outline: none;
+      }
+
+      .section-complete-btn[aria-pressed="true"] {
+        background-color: var(--color-success);
+        border-color: var(--color-success);
+        color: #ffffff;
+      }
+
+      .section-complete-btn[aria-pressed="true"]:hover,
+      .section-complete-btn[aria-pressed="true"]:focus-visible {
+        background-color: #15733f;
+        border-color: #15733f;
+        color: #ffffff;
+      }
+
       .section--completed::before {
         background-color: var(--color-success-bg);
         opacity: 1;
@@ -359,6 +398,10 @@
           align-items: center;
         }
 
+        .section-complete-btn {
+          padding: 1.3vh 1.1vw;
+          border-radius: 2.5vw;
+        }
       }
     </style>
   </head>
@@ -478,6 +521,16 @@
             <li>Минимальный порог прохождения каждого теста - <b>90%</b>.</li>
           </ul>
           <p class="attention">Примерное время прохождения - 1.5 часа</p>
+          <button
+            class="section-complete-btn"
+            type="button"
+            data-section-complete-btn
+            data-default-label="Я прошел онлайн-инструктажи"
+            data-completed-label="Инструктажи подтверждены"
+            aria-controls="ediny-den-oformleniya poluchenie-propuska-i-zarplatnoy-karty"
+          >
+            Я прошел онлайн-инструктажи
+          </button>
         </div>
       </section>
 
@@ -1651,6 +1704,74 @@
         window.addEventListener("scroll", updateToolbarFade, { passive: true });
       })();
 
+      (function () {
+        const sections = document.querySelectorAll("main section");
+        if (!sections.length) {
+          return;
+        }
+
+        const DEFAULT_LABEL = "Отметить этап выполненным";
+        const COMPLETED_LABEL = "Этап выполнен";
+        const PROGRESS_SECTION_ID = "prohozhdenie-onlayn-instruktazh";
+        const PROGRESS_TARGET_IDS = [
+          "ediny-den-oformleniya",
+          "poluchenie-propuska-i-zarplatnoy-karty",
+        ];
+
+        const resolveProgressTargets = () =>
+          PROGRESS_TARGET_IDS.map((id) => document.getElementById(id)).filter(Boolean);
+
+        const ensureButton = (section) => {
+          let button = section.querySelector("[data-section-complete-btn]");
+          if (button) {
+            button.classList.add("section-complete-btn");
+            button.type = button.type || "button";
+            return button;
+          }
+
+          button = document.createElement("button");
+          button.type = "button";
+          button.className = "section-complete-btn";
+          button.setAttribute("data-section-complete-btn", "");
+          section.appendChild(button);
+          return button;
+        };
+
+        sections.forEach((section) => {
+          const button = ensureButton(section);
+          const defaultLabel = button.getAttribute("data-default-label")?.trim() || DEFAULT_LABEL;
+          const completedLabel =
+            button.getAttribute("data-completed-label")?.trim() || COMPLETED_LABEL;
+
+          const progressTargets =
+            section.id === PROGRESS_SECTION_ID ? resolveProgressTargets() : [];
+
+          if (progressTargets.length) {
+            button.setAttribute(
+              "aria-controls",
+              progressTargets.map((target) => target.id).join(" "),
+            );
+          }
+
+          const setState = (isCompleted) => {
+            section.classList.toggle("section--completed", isCompleted);
+            button.setAttribute("aria-pressed", String(isCompleted));
+            button.textContent = isCompleted ? completedLabel : defaultLabel;
+            if (progressTargets.length) {
+              progressTargets.forEach((target) => {
+                target.hidden = !isCompleted;
+              });
+            }
+          };
+
+          button.addEventListener("click", () => {
+            const isCompleted = button.getAttribute("aria-pressed") === "true";
+            setState(!isCompleted);
+          });
+
+          setState(section.classList.contains("section--completed"));
+        });
+      })();
     </script>
   </body>
 </html>
