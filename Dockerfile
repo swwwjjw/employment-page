@@ -20,6 +20,7 @@ COPY parking.jpg /usr/share/nginx/html/parking.jpg
 COPY Montserrat /usr/share/nginx/html/Montserrat
 COPY trudovaya_guide.pdf /usr/share/nginx/html/trudovaya_guide.pdf
 COPY judgement_guide.pdf /usr/share/nginx/html/judgement_guide.pdf
+COPY transport_safety_guide.pdf /usr/share/nginx/html/transport_safety_guide.pdf
 
 EXPOSE 80
 
