@@ -24,10 +24,14 @@ This document lists everything required to package and ship the static employmen
    ```bash
    docker build -t employment-page:$(git rev-parse --short HEAD) .
    ```
-3. **Run smoke tests locally** (serves on http://localhost:7000 and on http://188.127.224.145:7000 when executed on the target server):
+3. **Run smoke tests locally** (serves on http://localhost:7000 and also accepts http://work-pulkovo.ru via port 80):
    ```bash
    docker compose up --build
-   # or: docker run -p 7000:80 employment-page:<tag>
+   # or: docker run -p 80:80 -p 7000:80 employment-page:<tag>
+   ```
+   For local domain testing add this host entry on your machine:
+   ```text
+   127.0.0.1 work-pulkovo.ru www.work-pulkovo.ru
    ```
 4. **Validate assets** by loading the page, switching the dropdown, and inspecting the browser console for 404s or CORS errors.
 5. **Stop and clean up** when satisfied:
@@ -53,7 +57,7 @@ This document lists everything required to package and ship the static employmen
    ```bash
    docker compose up -d
    # or without Compose
-   docker run -d --name employment-page -p 7000:80 employment-page:<tag>
+   docker run -d --name employment-page -p 80:80 -p 7000:80 employment-page:<tag>
    ```
 4. Verify health:
    ```bash

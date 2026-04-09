@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     image: employment-page:local
     ports:
+      - "80:80"
       - "7000:80"
     restart: unless-stopped
     healthcheck:
