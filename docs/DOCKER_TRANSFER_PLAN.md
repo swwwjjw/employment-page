@@ -24,12 +24,16 @@ This document lists everything required to package and ship the static employmen
    ```bash
    docker build -t employment-page:$(git rev-parse --short HEAD) .
    ```
-3. **Run smoke tests locally** (serves on http://localhost:7000 and also accepts http://work-pulkovo.ru via port 80):
+3. **Run smoke tests locally** (default mode serves on http://localhost:7000):
    ```bash
    docker compose up --build
-   # or: docker run -p 80:80 -p 7000:80 employment-page:<tag>
+   # or: docker run -p 7000:80 employment-page:<tag>
    ```
-   For local domain testing add this host entry on your machine:
+   If port `80` is free and you also want domain redirect mode (`work-pulkovo.ru -> 127.0.0.1:7000`), start with the override file:
+   ```bash
+   docker compose -f compose.yaml -f compose.domain.yaml up --build
+   ```
+   Then add this host entry on your machine:
    ```text
    127.0.0.1 work-pulkovo.ru www.work-pulkovo.ru
    ```
@@ -57,6 +61,12 @@ This document lists everything required to package and ship the static employmen
    ```bash
    docker compose up -d
    # or without Compose
+   docker run -d --name employment-page -p 7000:80 employment-page:<tag>
+   ```
+   Optional domain redirect mode on hosts where port `80` is available:
+   ```bash
+   docker compose -f compose.yaml -f compose.domain.yaml up -d
+   # or
    docker run -d --name employment-page -p 80:80 -p 7000:80 employment-page:<tag>
    ```
 4. Verify health:
